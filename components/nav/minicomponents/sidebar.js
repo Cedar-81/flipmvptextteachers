@@ -7,7 +7,7 @@ function Sidebar() {
   return (
     <div
       onClick={() => toggle_menu()}
-      className="w-[20%] h-full fixed top-0 z-10 left-0 bg-main_color shadow-lg"
+      className="w-[20%] h-full fixed top-0 z-50 left-0 bg-main_color shadow-lg"
     >
       <div className="mt-[2rem] px-2">
         <Image src="/assets/logo.png" width={67} height={28} />

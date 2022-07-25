@@ -5,17 +5,17 @@ import { TeacherContext } from "../contexts/teachercontext";
 
 function Sidenav() {
   const router = useRouter();
-  const { setShelf2, setCreate, setTopbaraction, topbaraction } =
+  const { setShelf2, setCreate, setTopbaraction, create } =
     useContext(TeacherContext);
 
   const show_shelf = () => {
+    setCreate(false);
+    setTopbaraction("Notes");
+    setShelf2(true);
     if (router.query.id === undefined) {
       router.push("/teacher/bookshelf");
       console.log(true);
     }
-    console.log("router", router.query.id);
-    setTopbaraction("Notes");
-    setShelf2(true);
   };
 
   return (

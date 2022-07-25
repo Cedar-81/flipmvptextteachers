@@ -1,14 +1,10 @@
 import React, { useContext } from "react";
 import { useCallback, useEffect, useState } from "react";
+import Quill from "quill";
 import "quill/dist/quill.snow.css";
 import { TeacherContext } from "../../contexts/teachercontext";
 import { gql, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
-import dynamic from "next/dynamic";
-
-const Quill = dynamic(() => import("quill"), {
-  ssr: false,
-});
 
 const UpdateTeacherNote = gql`
   mutation UpdateTeacherNote($input: updateTeacherNoteInput) {
@@ -69,6 +65,12 @@ function Editor({ edit_content }) {
   useEffect(() => setCreate(true));
 
   let refectch = {};
+
+  useEffect(() => {
+    if (classcoursedata.courseId === "" || classcoursedata.classId === "") {
+      router.push("/teacher/bookshelf");
+    }
+  }, []);
 
   console.log("I am here ");
 

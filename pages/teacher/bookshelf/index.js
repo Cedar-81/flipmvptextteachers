@@ -8,10 +8,10 @@ function Index() {
     setTopbaraction("Welcome");
   }, []);
   return (
-    <div className="pt-[7%] h-[100vh] flex-row items-center justify-center w-full ">
-      <Welcome className="h-[67%] mt-8 mx-auto opacity-75" />
-      <div className="w-full text-center mt-4">
-        <h3 className=" text-3xl font-[Fira-sans]">
+    <div className="pt-[7%] h-[100vh] flex-row items-center z-0 justify-center w-[100vw] md:w-full ">
+      <Welcome className="h-[67%] mt-[40%] ml-[4%] relative z-0 md:mt-8 md:mx-auto opacity-75" />
+      <div className="w-[150vw] mt-[15%] md:w-full text-center md:mt-4">
+        <h3 className=" text-3xl text-center font-[Fira-sans]">
           Welcome Aboard, lets get started.
           <span className="block text-lg font-[Inter] ">
             First, select a class from the topbar

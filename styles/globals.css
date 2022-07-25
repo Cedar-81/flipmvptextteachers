@@ -85,6 +85,10 @@ a {
 
 /* text_editor */
 
+svg {
+  z-index: 0 !important;
+}
+
 /* note display */
 
 .note_content h1 {

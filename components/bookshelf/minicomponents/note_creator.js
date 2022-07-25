@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { TeacherContext } from "../../contexts/teachercontext";
 import { gql, useMutation } from "@apollo/client";
 
@@ -40,6 +40,16 @@ function Note_creator() {
     setCreatednoteid,
     setCreate,
   } = useContext(TeacherContext);
+
+  useEffect(() => {
+    setNotetitle("Untitled");
+  }, []);
+
+  useEffect(() => {
+    if (notetitle.trim().length === 0) {
+      setNotetitle("Untitled");
+    }
+  }, [notetitle]);
 
   const [addTeacherNote, { data, loading, error }] = useMutation(
     AddTeacherNote,
