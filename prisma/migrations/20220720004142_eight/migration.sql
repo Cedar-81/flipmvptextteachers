@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "Student" ALTER COLUMN "phoneNo" SET DATA TYPE TEXT;
+
+-- AlterTable
+ALTER TABLE "Teacher" ALTER COLUMN "phoneNo" SET DATA TYPE TEXT;

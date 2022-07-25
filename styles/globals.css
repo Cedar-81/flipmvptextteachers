@@ -1,0 +1,172 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Fira Sans", sans-serif;
+  font-family: "Inter", sans-serif;
+  --tw-bg-opacity: 1;
+  background-color: rgb(238 241 246 / var(--tw-bg-opacity));
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* text_editor */
+
+.container .ql-editor {
+  width: 8.5in;
+  border: 1px solid rgba(255, 0, 0, 0.61);
+  height: max-content;
+  border-radius: 10px;
+  padding: 1in;
+  margin: 1rem;
+  margin-top: 9%;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+  background-color: white;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.container .ql-container.ql-snow {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 6rem;
+  border: none;
+}
+
+.container .ql-toolbar.ql-snow {
+  display: flex;
+  justify-content: space-between;
+  position: sticky;
+  top: 10%;
+  z-index: 1;
+  background-color: #eef1f6;
+  border: none;
+  width: 100%;
+  margin: auto;
+  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color),
+    0 2px 4px -2px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+@page {
+  margin: 1in;
+}
+
+@media print {
+  body {
+    background: none;
+  }
+
+  .container .ql-editor {
+    width: 6.5in;
+    height: 9in;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+    align-self: flex-start;
+  }
+
+  .container .ql-toolbar.ql-snow {
+    display: none;
+  }
+}
+
+/* text_editor */
+
+/* note display */
+
+.note_content h1 {
+  font-size: 1.25rem; /* 20px */
+  line-height: 1.75rem; /* 28px */
+  font-weight: 500;
+}
+
+.note_content h2 {
+  font-size: 1.125rem; /* 18px */
+  line-height: 1.75rem; /* 28px */
+  font-weight: 500;
+}
+
+.note_content h3 {
+  font-size: 1rem; /* 16px */
+  line-height: 1.5rem; /* 24px */
+  font-weight: 500;
+}
+
+.note_content h4 {
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.25rem; /* 20px */
+  font-weight: 400;
+}
+
+.note_content h5 {
+  font-size: 0.75rem; /* 12px */
+  line-height: 1rem; /* 16px */
+  font-weight: 400;
+}
+
+.note_content img {
+  margin: auto;
+  /* width: 100%; */
+}
+
+/* note display */
+
+/* table styling */
+
+thead {
+  height: 3.5rem;
+  background-color: #a5b4df5e;
+  color: #474d5c94;
+}
+
+table {
+  color: #474d5c94;
+}
+
+/* table styling */
+
+/* scrollbar style */
+
+/* width */
+body::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+/* Track */
+*::-webkit-scrollbar-track {
+  background: #dddddd;
+  border-radius: 15px;
+  margin: 0.3em;
+}
+
+/* Handle */
+*::-webkit-scrollbar-thumb {
+  background: #474d5c94;
+  border-radius: 15px;
+}
+
+/* Handle on hover */
+*::-webkit-scrollbar-thumb:hover {
+  background: #474d5c94;
+}
+
+/* scrollbar style */

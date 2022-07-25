@@ -1,0 +1,96 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Teacher {
+  id String @id @default(cuid())
+  firstName String
+  lastName String
+  address String
+  state String
+  country String
+  postalCode String
+  email String
+  image String
+  phoneNo String
+  classes Class[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime 
+  password String 
+}
+
+model Student {
+  id String @id @default(cuid())
+  firstName String
+  lastName String
+  address String
+  state String
+  country String
+  postalCode String
+  email String
+  image String
+  dateOfBirth DateTime
+  phoneNo String?
+  class String
+  notes Student_Note[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime 
+  password String 
+}
+
+model Course {
+  id String @id @default(cuid())
+  course String
+  class Class[]
+}
+
+model Class { 
+  id String @id @default(cuid())
+  class String
+  courses Course[]
+  teacher Teacher @relation(fields: [teacherId], references: [id])
+  teacherId String
+}
+
+
+model Teacher_Note {
+  id String @id @default(cuid())
+  topic String
+  classId String[]
+  courseId String
+  category String
+  content String
+  editableContent String
+  authorId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime 
+}
+
+model Student_Note {
+  id String @id @default(cuid())
+  topic String
+  category String
+  content String
+  editableContent String
+  author Student @relation(fields: [authorId], references: [id])
+  authorId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime 
+}
+
+model Student_Teacher_Course {
+  id String @id @default(cuid())
+  studentId String
+  classId String
+  teacherId String
+  courseList String[]
+  verified Boolean
+}
