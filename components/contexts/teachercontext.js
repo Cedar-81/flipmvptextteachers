@@ -12,6 +12,7 @@ function Teachercontextprovider({ children }) {
   const [sidebartype, setSidebartype] = useState("");
   const [shelf2, setShelf2] = useState(false);
   const [shelf3, setShelf3] = useState(false);
+  const [updatenotechecker, setUpdatenotechecker] = useState(false);
   const [bookshelfbuttons, setBookshelfbuttons] = useState({
     toggle_components: false,
     show_editor: false,
@@ -35,12 +36,7 @@ function Teachercontextprovider({ children }) {
   const [notetitle, setNotetitle] = useState("Untitled");
   const [editablecontent, setEditablecontent] = useState("");
   const [creatednoteid, setCreatednoteid] = useState("");
-  const [savenote, setSavenote] = useState({
-    noteTitle: "",
-    noteType: "",
-    noteContent: "",
-    editablecontent: "",
-  });
+  const [savenote, setSavenote] = useState(false);
   const [teacherid, setTeacherid] = useState("cl60fwtlx0056dckskcuwnjey");
   const [teacherprofile, setTeacherprofile] = useState({
     firstname: "",
@@ -118,6 +114,8 @@ function Teachercontextprovider({ children }) {
     setBookshelfbuttons,
     notedata,
     setNotedata,
+    updatenotechecker,
+    setUpdatenotechecker,
   };
 
   return (

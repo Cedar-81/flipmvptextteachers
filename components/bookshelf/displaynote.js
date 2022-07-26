@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { TeacherContext } from "../contexts/teachercontext";
 import { gql, useQuery } from "@apollo/client";
 import moment from "moment";
 import Bookshelfeditbutton from "./minicomponents/bookshelfeditbutton";
 import Editor from "./minicomponents/editor";
+import { useRouter } from "next/router";
 
 const Note = gql`
   query Note($noteId: ID!) {
@@ -19,8 +20,15 @@ const Note = gql`
 `;
 
 function Displaynote() {
-  const { savenote, setCreate, creatednoteid, notedata, setNotedata } =
-    useContext(TeacherContext);
+  const {
+    savenote,
+    setCreate,
+    creatednoteid,
+    notedata,
+    setNotedata,
+    setUpdatenotechecker,
+    classcoursedata,
+  } = useContext(TeacherContext);
 
   console.log(creatednoteid);
   const { data, error, loading } = useQuery(Note, {
@@ -29,9 +37,23 @@ function Displaynote() {
     },
   });
 
-  let val = "...";
+  const router = useRouter();
+
+  useEffect(() => {
+    if ((classcoursedata.classId === "", classcoursedata.courseId === "")) {
+      router.push("/teacher/bookshelf");
+    }
+  }, []);
+
+  let val = {
+    topic: "...",
+    content: "loading...",
+  };
   if (loading) {
-    val = "...";
+    val = {
+      topic: "...",
+      content: "loading...",
+    };
   }
   if (error) {
     console.log(JSON.stringify(error, null, 2));
@@ -42,8 +64,9 @@ function Displaynote() {
 
   if (!notedata.updateNote) setCreate(false);
 
-  function save_note_update() {
-    setNotedata({
+  async function save_note_update() {
+    setUpdatenotechecker(true);
+    await setNotedata({
       ...notedata,
       updateNote: false,
       updateContent: "",

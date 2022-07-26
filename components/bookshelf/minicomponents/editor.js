@@ -63,6 +63,10 @@ function Editor({ edit_content }) {
     classcoursedata,
     notedata,
     setNotedata,
+    setSavenote,
+    savenote,
+    updatenotechecker,
+    setUpdatenotechecker,
   } = useContext(TeacherContext);
   const [quill, setQuill] = useState();
   const [ready, setReady] = useState(false);
@@ -108,7 +112,18 @@ function Editor({ edit_content }) {
     courseId: classcoursedata.courseId,
   };
 
+  const save_note = async () => {
+    setSavenote(true);
+    await updateTeacherNote({ variables: { input: inputVal } });
+    setSavenote(false);
+    setUpdatenotechecker(false);
+    router.push("/teacher/bookshelf/" + notetype + "/" + creatednoteid);
+  };
+
   useEffect(() => {
+    if (updatenotechecker) {
+      save_note();
+    }
     if (notedata.updateNote) {
       updateTeacherNote({ variables: { input: inputVal } });
     }
@@ -160,15 +175,31 @@ function Editor({ edit_content }) {
         modules: { toolbar: TOOLBAR_OPTIONS },
       });
       setQuill(q);
-    }
-
-    if (notedata.updateNote) {
-      q.disable();
-      q.setText("Loading...");
+      if (notedata.updateNote) {
+        q.disable();
+        q.setText("Loading...");
+      }
     }
   }, []);
 
-  return <div className="container" ref={wrapperRef}></div>;
+  return (
+    <>
+      {savenote && (
+        <div className="w-full flex items-center justify-center border-2">
+          <p className="fixed py-2 text-xs px-4 text-center mx-auto shadow-lg bg-accent_color text-main_color top-[17%]">
+            Saving... Just a moment
+          </p>
+        </div>
+      )}
+      <div className="container" ref={wrapperRef}></div>
+      <button
+        onClick={save_note}
+        className="fixed right-9 bottom-8 w-[6rem] h-[2.5rem] rounded-md bg-accent_color text-main_color cursor-pointer border-2"
+      >
+        Done
+      </button>
+    </>
+  );
 }
 
 export default Editor;
