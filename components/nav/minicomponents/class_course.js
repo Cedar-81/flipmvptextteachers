@@ -88,7 +88,7 @@ function Class_course() {
   });
 
   return (
-    <div className="nav_displays z-50 fixed bg-main_color md:right-[6rem] md:pt-0 md:mt-4 md:h-max md:w-max md:rounded-md md:shadow-md top-0 h-[90%] w-[100vw] ">
+    <div className="nav_displays z-50 fixed md:top-[9%] bg-main_color md:right-[6rem] md:pt-0 md:mt-4 md:h-max md:w-max md:rounded-md md:shadow-md top-0 h-[90%] w-[100vw] ">
       <div className="class_course w-full md:w-[20rem] pt-4 md:pt-0 bg-main_color md:bg-main_color md:h-[20rem] md:rounded-md items-center h-full">
         <div className="flex md:mt-0 md:hidden">
           <div

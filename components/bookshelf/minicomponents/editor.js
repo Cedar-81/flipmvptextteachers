@@ -1,11 +1,16 @@
 import React, { useContext } from "react";
 import { useCallback, useEffect, useState } from "react";
-import Quill from "quill";
 import "quill/dist/quill.snow.css";
 import { TeacherContext } from "../../contexts/teachercontext";
 import { gql, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
-import dynamic from "next/dynamic";
+
+const load_quill = () => {
+  if (typeof document !== "undefined") {
+    const Quill = require("quill");
+    return Quill;
+  }
+};
 
 const UpdateTeacherNote = gql`
   mutation UpdateTeacherNote($input: updateTeacherNoteInput) {
@@ -149,6 +154,7 @@ function Editor({ edit_content }) {
     const editor = document.createElement("div");
     wrapper.append(editor);
     if (typeof document !== "undefined") {
+      let Quill = load_quill();
       const q = new Quill(editor, {
         theme: "snow",
         modules: { toolbar: TOOLBAR_OPTIONS },
