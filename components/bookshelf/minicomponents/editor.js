@@ -5,6 +5,7 @@ import "quill/dist/quill.snow.css";
 import { TeacherContext } from "../../contexts/teachercontext";
 import { gql, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
 
 const UpdateTeacherNote = gql`
   mutation UpdateTeacherNote($input: updateTeacherNoteInput) {
@@ -32,11 +33,11 @@ const TOOLBAR_OPTIONS = [
   [{ header: [1, 2, 3, 4, 5, 6, false] }],
   [{ font: [] }],
   [{ list: "ordered" }, { list: "bullet" }],
-  ["bold", "italic", "underline"],
+  ["bold", "italic", "underline", "strike"],
   [{ color: [] }, { background: [] }],
   [{ script: "sub" }, { script: "super" }],
-  [{ align: [] }],
-  ["image", "blockquote", "code-block"],
+  [{ indent: "-1" }, { indent: "+1" }, { align: [] }],
+  ["image", "blockquote", "code-block", "link", "video"],
   ["clean"],
 ];
 
@@ -147,11 +148,13 @@ function Editor({ edit_content }) {
     wrapper.innerHTML = "";
     const editor = document.createElement("div");
     wrapper.append(editor);
-    const q = new Quill(editor, {
-      theme: "snow",
-      modules: { toolbar: TOOLBAR_OPTIONS },
-    });
-    setQuill(q);
+    if (typeof document !== "undefined") {
+      const q = new Quill(editor, {
+        theme: "snow",
+        modules: { toolbar: TOOLBAR_OPTIONS },
+      });
+      setQuill(q);
+    }
 
     if (notedata.updateNote) {
       q.disable();
