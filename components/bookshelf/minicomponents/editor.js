@@ -116,7 +116,9 @@ function Editor({ edit_content }) {
       if (quill !== undefined) {
         quill.on("text-change", (delta, oldDelta, source) => {
           if (source == "user") {
-            updateTeacherNote({ variables: { input: inputVal } });
+            setTimeout(() => {
+              updateTeacherNote({ variables: { input: inputVal } });
+            }, 5000);
           }
         });
       }
