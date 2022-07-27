@@ -20,6 +20,7 @@ export const typeDefs = gql`
     updateTeacherNote(input: updateTeacherNoteInput): Teacher_Note!
     updateTeacherProfile(input: updateTeacherProfileInput): Teacher!
     deleteTeacherNote(input: deleteTeacherNoteInput): String
+    createClass(input: createClassInput): String
   }
 
   type Class {
@@ -90,6 +91,11 @@ export const typeDefs = gql`
 
   input deleteTeacherNoteInput {
     id: String!
+  }
+
+  input createClassInput {
+    class: String
+    teacherId: String
   }
 
   input updateTeacherNoteInput {

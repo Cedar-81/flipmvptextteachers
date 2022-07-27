@@ -60,7 +60,6 @@ model Class {
   teacherId String
 }
 
-
 model Teacher_Note {
   id String @id @default(cuid())
   topic String

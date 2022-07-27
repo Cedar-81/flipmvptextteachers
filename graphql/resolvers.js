@@ -122,6 +122,18 @@ export const resolvers = {
       return "done";
     },
 
+    createClass: async (parent, { input }, context) => {
+      const newClass = {
+        class: input.class,
+        teacherId: input.teacherId,
+      };
+      await context.prisma.class.create({
+        data: newClass,
+      });
+
+      return "Done";
+    },
+
     updateTeacherProfile: async (parent, { input }, context) => {
       const upadateDate = new Date();
       const newInfo = {
