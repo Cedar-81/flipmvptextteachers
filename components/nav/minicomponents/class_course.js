@@ -36,7 +36,7 @@ function Class_course() {
   if (loading) {
     classes = <p>loading...</p>;
   }
-
+  console.log(data);
   if (data)
     classes = data.teacher.classes.map((val, index) => {
       return (
@@ -88,7 +88,7 @@ function Class_course() {
   });
 
   return (
-    <div className="nav_displays z-50 fixed md:top-[9%] bg-main_color md:right-[6rem] md:pt-0 md:mt-4 md:h-max md:w-max md:rounded-md md:shadow-md top-0 h-[90%] w-[100vw] ">
+    <div className="nav_displays z-50 fixed overflow-y-scroll md:top-[9%] bg-main_color md:right-[6rem] md:pt-0 md:mt-4 md:h-max md:w-max md:rounded-md md:shadow-md top-0 h-[90%] w-[100vw] ">
       <div className="class_course w-full md:w-[20rem] pt-4 md:pt-0 bg-main_color md:bg-main_color md:h-[20rem] md:rounded-md items-center h-full">
         <div className="flex md:mt-0 md:hidden">
           <div
@@ -107,19 +107,21 @@ function Class_course() {
         <div className="class_course_con w-full mt-7 h-full ">
           {action == "Class" && (
             <div className="display bg-main_color h-full pt-8 md:pt-0">
-              <div
-                onClick={() =>
-                  setClasscoursedata({
-                    ...classcoursedata,
-                    action: "new_class",
-                  })
-                }
-                className="item cursor-pointer sticky top-4 flex bg-accent_color_2 w-[95%] mb-4 px-4 h-[3rem] items-center mx-auto rounded-xl"
-              >
-                <span className="material-icons text-accent_color">add</span>
-                <p className="item_text md:text-sm ml-4 text-xl font-medium">
-                  Add class
-                </p>
+              <div className="bg-main_color sticky top-0 py-2 ">
+                <div
+                  onClick={() =>
+                    setClasscoursedata({
+                      ...classcoursedata,
+                      action: "new_class",
+                    })
+                  }
+                  className="item cursor-pointer flex bg-accent_color_2 w-[95%] mb-4 px-4 h-[3rem] items-center mx-auto rounded-xl"
+                >
+                  <span className="material-icons text-accent_color">add</span>
+                  <p className="item_text md:text-sm ml-4 text-xl font-medium">
+                    Add class
+                  </p>
+                </div>
               </div>
               {classes}
             </div>

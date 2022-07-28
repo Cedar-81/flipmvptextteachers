@@ -45,6 +45,10 @@ function Newclass() {
 
   const create = () => {
     create_class({ variables: { input: inputVal } });
+    setClasscoursedata({
+      ...classcoursedata,
+      action: "",
+    });
   };
 
   return (
