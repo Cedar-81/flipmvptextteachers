@@ -52,8 +52,8 @@ function Shareclass() {
         </p>
         <p className=" mt-3">
           <span className="text-xs text-left block">
-            Hey, here's a link to this class you can share it to whomever you
-            want to join the class.
+            Hey, here&apos;s a link to this class you can share it to whomever
+            you want to join the class.
           </span>
           <span className="text-xl mt-2 text-center block">
             {classcoursedata.classCode}
