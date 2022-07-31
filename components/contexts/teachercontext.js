@@ -21,7 +21,11 @@ function Teachercontextprovider({ children }) {
     classId: "",
     courseId: "",
     action: "",
+    working: false,
+    workingText: "",
+    classCode: "",
   });
+  const [ccdaction, setCcdaction] = useState("");
   const [notedata, setNotedata] = useState({
     updateNote: false,
     updateContent: "",
@@ -37,6 +41,7 @@ function Teachercontextprovider({ children }) {
   const [editablecontent, setEditablecontent] = useState("");
   const [creatednoteid, setCreatednoteid] = useState("");
   const [savenote, setSavenote] = useState(false);
+  const [action, setAction] = useState("Class");
   const [teacherid, setTeacherid] = useState("cl60fwtlx0056dckskcuwnjey");
   const [teacherprofile, setTeacherprofile] = useState({
     firstname: "",
@@ -116,6 +121,10 @@ function Teachercontextprovider({ children }) {
     setNotedata,
     updatenotechecker,
     setUpdatenotechecker,
+    action,
+    setAction,
+    ccdaction,
+    setCcdaction,
   };
 
   return (

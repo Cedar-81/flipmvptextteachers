@@ -22,6 +22,9 @@ export const typeDefs = gql`
     deleteTeacherNote(input: deleteTeacherNoteInput): String
     createClass(input: createClassInput): String
     createCourse(input: createCourseInput): String
+    deleteClass(input: deleteClassInput): String
+    deleteCourse(input: deleteCourseInput): String
+    shareNote(input: shareNoteInput): String
   }
 
   type Class {
@@ -29,6 +32,7 @@ export const typeDefs = gql`
     class: String
     teacherId: String!
     courses: [Course]
+    classCode: String
   }
 
   type Teacher {
@@ -50,11 +54,12 @@ export const typeDefs = gql`
   type Teacher_Note {
     id: String!
     topic: String
-    classId: [String!]!
+    classId: String
     courseId: String!
     category: String
     content: String
     editableContent: String
+    available: Boolean
     authorId: String
     updatedAt: String
   }
@@ -81,7 +86,7 @@ export const typeDefs = gql`
 
   input addTeacherNoteInput {
     topic: String
-    classId: [String]
+    classId: String
     courseId: String
     category: String
     content: String
@@ -94,9 +99,18 @@ export const typeDefs = gql`
     id: String!
   }
 
+  input deleteClassInput {
+    id: String!
+  }
+
+  input deleteCourseInput {
+    id: String!
+  }
+
   input createClassInput {
     class: String
     teacherId: String
+    classCode: String
   }
 
   input createCourseInput {
@@ -104,15 +118,21 @@ export const typeDefs = gql`
     course: String
   }
 
+  input shareNoteInput {
+    id: String
+    available: Boolean
+  }
+
   input updateTeacherNoteInput {
     id: String!
     topic: String
-    classId: [String]
+    classId: String
     courseId: String
     category: String
     content: String
     editableContent: String
     authorId: String
+    available: Boolean
     updatedAt: String
   }
 `;

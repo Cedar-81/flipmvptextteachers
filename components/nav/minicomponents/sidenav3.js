@@ -123,7 +123,7 @@ function Sidenav3() {
   };
 
   return (
-    <div className="w-[15%]  overflow-y-auto fixed ml-[20%] z-[15] h-[100%] bg-main_color shadow-lg">
+    <div className="w-[15%]  overflow-y-auto fixed ml-[20%] z-[61] h-[100%] bg-main_color shadow-lg">
       <div
         onClick={() => setShelf3(false)}
         className="icon_con bg-main_color mt-4 w-full sticky top-1 cursor-pointer text-right"

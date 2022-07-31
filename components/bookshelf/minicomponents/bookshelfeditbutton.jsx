@@ -23,6 +23,8 @@ function Bookshelfeditbutton() {
     setNotedata,
     notedata,
     setNotetitle,
+    notetype,
+    setCcdaction,
   } = useContext(TeacherContext);
   const router = useRouter();
 
@@ -63,8 +65,6 @@ function Bookshelfeditbutton() {
   };
 
   const edit_note = () => {
-    console.log(router.query.id);
-    console.log("its me");
     const note = find_note(router.query.id);
     setNotetitle(note.topic);
     setNotedata({
@@ -72,6 +72,10 @@ function Bookshelfeditbutton() {
       updateNote: true,
       updateContent: note.content,
     });
+  };
+
+  const share_note = () => {
+    setCcdaction("share_note");
   };
 
   return (
@@ -96,9 +100,14 @@ function Bookshelfeditbutton() {
           >
             <span className="material-icons text-accent_color">edit</span>
           </div>
-          <div className="bg-main_color h-[3rem] flex items-center justify-center rounded-full shadow-md cursor-pointer w-[3rem] mb-4">
-            <span className="material-icons text-accent_color">share</span>
-          </div>
+          {notetype === "school" && (
+            <div
+              onClick={share_note}
+              className="bg-main_color h-[3rem] flex items-center justify-center rounded-full shadow-md cursor-pointer w-[3rem] mb-4"
+            >
+              <span className="material-icons text-accent_color">share</span>
+            </div>
+          )}
           <div
             onClick={delete_note}
             className="bg-main_color h-[3rem] flex items-center justify-center rounded-full shadow-md cursor-pointer w-[3rem] mb-4"

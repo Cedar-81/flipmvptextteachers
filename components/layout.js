@@ -11,6 +11,11 @@ import Sidebar2 from "./nav/minicomponents/sidebar2";
 import Sidebar3 from "./nav/minicomponents/sidebar3";
 import Newclass from "./nav/minicomponents/newclass";
 import Note_deletor from "./bookshelf/minicomponents/note_deletor";
+import Newcourse from "./nav/minicomponents/newcourse";
+import Deleteclass from "./nav/minicomponents/deleteclass";
+import Deletecourse from "./nav/minicomponents/deletecourse";
+import Shareclass from "./nav/minicomponents/shareclass";
+import Note_share from "./bookshelf/minicomponents/note_share";
 
 function Layout({ children }) {
   const {
@@ -22,9 +27,9 @@ function Layout({ children }) {
     sidebartype,
     classcoursedata,
     notedata,
+    ccdaction,
     toggle_menu,
   } = useContext(TeacherContext);
-
   return (
     <div className="flex w-[100%] max-w-[100%] h-[100vh] ">
       <div className="contents border-2">
@@ -45,6 +50,11 @@ function Layout({ children }) {
           {notification && <Notifications />}
           {class_course && <Class_course />}
           {classcoursedata.action === "new_class" && <Newclass />}
+          {classcoursedata.action === "new_course" && <Newcourse />}
+          {ccdaction === "delete_class" && <Deleteclass />}
+          {ccdaction === "delete_course" && <Deletecourse />}
+          {ccdaction === "share_class" && <Shareclass />}
+          {ccdaction === "share_note" && <Note_share />}
           {notedata.deleteNote && <Note_deletor />}
           <div className=" bg-accent_bkg_color relative top-[10%] w-full md:static md:top-0">
             {children}

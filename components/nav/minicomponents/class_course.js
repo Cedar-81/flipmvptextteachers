@@ -8,6 +8,7 @@ const TeacherClassCourse = gql`
       classes {
         id
         class
+        classCode
         courses {
           id
           course
@@ -18,13 +19,15 @@ const TeacherClassCourse = gql`
 `;
 
 function Class_course() {
-  const [action, setAction] = useState("Class");
   const [course_list, setCourse_list] = useState([]);
   const {
     toggle_class_course,
     teacherid,
     setClasscoursedata,
     classcoursedata,
+    action,
+    setAction,
+    setCcdaction,
   } = useContext(TeacherContext);
 
   const { data, error, loading } = useQuery(TeacherClassCourse, {
@@ -46,21 +49,39 @@ function Class_course() {
             setClasscoursedata({
               courseId: "",
               classId: val.id,
+              classCode: val.classCode,
             });
             setAction("Course");
           }}
-          className="item cursor-pointer flex bg-accent_bkg_color w-[95%] mb-4 px-4 h-[3rem] items-center mx-auto rounded-xl"
+          className="item cursor-pointer flex bg-accent_bkg_color w-[95%] mb-4 px-4 h-[3rem] justify-between items-center mx-auto rounded-xl"
         >
-          <input type="checkbox" className="w-5 h-4" />
           <p className="item_text md:text-sm ml-4 text-xl font-semibold">
             {val.class}
           </p>
+          <div className="action flex">
+            <div
+              onClick={() => setCcdaction("share_class")}
+              className="rounded-full flex justify-center items-center bg-main_color h-8 w-8 shadow-md z-20 text-dark_color hover:text-accent_color"
+            >
+              <span className="material-icons text-[18px]">share</span>
+            </div>
+            <div
+              onClick={() => {
+                setCcdaction("delete_class");
+              }}
+              className="rounded-full flex justify-center ml-3 items-center bg-main_color shadow-md z-20 text-dark_color h-8 w-8 hover:text-accent_color"
+            >
+              <span className="material-icons text-[18px]  text-center">
+                delete
+              </span>
+            </div>
+          </div>
         </div>
       );
     });
 
   useEffect(() => {
-    if (data && action === "Course") {
+    if (data && action === "Course" && classcoursedata.classId !== "") {
       let val = data.teacher.classes.filter(
         (val) => val.id === classcoursedata.classId
       );
@@ -74,21 +95,39 @@ function Class_course() {
       <div
         key={index}
         onClick={() => {
-          setClasscoursedata({ ...classcoursedata, courseId: val.id });
+          setClasscoursedata({
+            ...classcoursedata,
+            courseId: val.id,
+            action: "",
+          });
           toggle_class_course(false);
         }}
-        className="item cursor-pointer flex bg-accent_bkg_color w-[95%] mb-4 px-4 h-[3rem] items-center mx-auto rounded-xl"
+        className="item cursor-pointer flex bg-accent_bkg_color justify-between w-[95%] mb-4 px-4 h-[3rem] items-center mx-auto rounded-xl"
       >
-        <input type="checkbox" className="w-5 h-4" />
         <p className="item_text md:text-sm ml-4 text-xl font-semibold">
           {val.course}
         </p>
+        <div
+          onClick={() => {
+            setCcdaction("delete_course");
+          }}
+          className="action rounded-full flex justify-center ml-3 items-center bg-main_color shadow-md z-20 text-dark_color h-8 w-8 hover:text-accent_color"
+        >
+          <span className="material-icons text-[18px]">delete</span>
+        </div>
       </div>
     );
   });
 
   return (
-    <div className="nav_displays z-50 fixed overflow-y-scroll md:top-[9%] bg-main_color md:right-[6rem] md:pt-0 md:mt-4 md:h-max md:w-max md:rounded-md md:shadow-md top-0 h-[90%] w-[100vw] ">
+    <div className="nav_displays z-50 fixed overflow-y-auto md:top-[9%] bg-main_color md:right-[6rem] md:pt-0 md:mt-4 md:h-max md:w-max md:rounded-md md:shadow-md top-0 h-[90%] w-[100vw] ">
+      {classcoursedata.working && (
+        <div className="w-full absolute z-10 top-1 flex items-center justify-center ">
+          <p className="py-2 text-xs px-4 text-center mx-auto shadow-lg bg-accent_color text-main_color">
+            {classcoursedata.workingText}Just a moment
+          </p>
+        </div>
+      )}
       <div className="class_course w-full md:w-[20rem] pt-4 md:pt-0 bg-main_color md:bg-main_color md:h-[20rem] md:rounded-md items-center h-full">
         <div className="flex md:mt-0 md:hidden">
           <div
@@ -107,7 +146,7 @@ function Class_course() {
         <div className="class_course_con w-full mt-7 h-full ">
           {action == "Class" && (
             <div className="display bg-main_color h-full pt-8 md:pt-0">
-              <div className="bg-main_color sticky top-0 py-2 ">
+              <div className="bg-main_color sticky top-0 pt-2 ">
                 <div
                   onClick={() =>
                     setClasscoursedata({
@@ -124,6 +163,7 @@ function Class_course() {
                 </div>
               </div>
               {classes}
+              <div className="h-4"></div>
             </div>
           )}
 
@@ -144,7 +184,7 @@ function Class_course() {
                 onClick={() =>
                   setClasscoursedata({
                     ...classcoursedata,
-                    action: "new_class",
+                    action: "new_course",
                   })
                 }
                 className="item cursor-pointer sticky top-4 flex bg-accent_color_2 w-[95%] mb-4 px-4 h-[3rem] items-center mx-auto rounded-xl"
@@ -155,6 +195,7 @@ function Class_course() {
                 </p>
               </div>
               {courses}
+              <div className="h-4"></div>
             </div>
           )}
         </div>

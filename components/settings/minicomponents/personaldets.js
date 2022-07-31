@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { TeacherContext } from "../../contexts/teachercontext";
 import { gql, useMutation, useQuery } from "@apollo/client";
 
@@ -33,6 +33,9 @@ function Personaldets() {
   const { setTopbaraction, teacherprofile, teacherid, setTeacherprofile } =
     useContext(TeacherContext);
 
+  const [saver, setSaver] = useState(false);
+  const [showinstruction, setShowinstruction] = useState(true);
+
   const styles = {
     input:
       "flex h-[3rem] text-lg font-medium rounded-md focus:shadow-lg focus:bg-main_color text-dark_color bg-accent_bkg_color py-1 my-4 w-full pl-3 outline-none",
@@ -61,7 +64,6 @@ function Personaldets() {
     {
       update(_, result) {
         // setCreatednoteid(result.data.addTeacherNote.id);
-        console.log(result);
       },
       refetchQueries: [
         { query: GetTeacherProfile, variables: { teacherId: teacherid } },
@@ -91,12 +93,13 @@ function Personaldets() {
   };
 
   const get_teacher_info = (e) => {
+    setSaver(true);
+    setShowinstruction(false);
     setTeacherprofile({ ...teacherprofile, [e.target.name]: e.target.value });
   };
 
   useEffect(() => {
     if (init_data) {
-      console.log("init_data", init_data);
       setTeacherprofile({
         firstname: init_data.teacher.firstName,
         lastname: init_data.teacher.lastName,
@@ -116,21 +119,28 @@ function Personaldets() {
   }, [init_data]);
 
   useEffect(() => {
-    if (init_data) {
-      update_teacher_profile();
-    }
     if (typeof document !== "undefined") {
-      console.log("inhere", teacherprofile.image);
       document.getElementById(
         "bckimg"
       ).style.backgroundImage = `url(${teacherprofile.image})`;
     }
   }, [teacherprofile]);
 
-  console.log(teacherprofile.image);
+  const update = () => {
+    if (init_data) {
+      update_teacher_profile();
+    }
+    setSaver(false);
+    setShowinstruction(true);
+  };
 
   return (
     <div className="w-[98%] md:w-[70%] mx-auto mt-9 h-full">
+      {showinstruction && (
+        <div className="text-sm text-center mb-4">
+          <p className="text-accent_color">Click on any info field to edit</p>
+        </div>
+      )}
       <div
         onClick={() => setTopbaraction("Settings")}
         className="back cursor-pointer left-4 top-[40%]"
@@ -246,6 +256,14 @@ function Personaldets() {
         className={`input ${styles.input}`}
         placeholder="Confirm New Password"
       />
+      {saver && (
+        <button
+          onClick={update}
+          className="fixed right-9 bottom-8 w-[6rem] h-[2.5rem] rounded-md bg-accent_color text-main_color cursor-pointer border-2"
+        >
+          Done
+        </button>
+      )}
       <div className="h-11"></div>
     </div>
   );

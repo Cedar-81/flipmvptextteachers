@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
 import { TeacherContext } from "../../contexts/teachercontext";
+import { useRouter } from "next/router";
 
 function Sidenav2() {
   const { setShelf2, setShelf3, setNotetype } = useContext(TeacherContext);
+  const router = useRouter();
   return (
-    <div className="w-[15%] fixed ml-[5%] z-20 h-[100%] bg-main_color shadow-lg">
+    <div className="w-[15%] fixed ml-[5%] z-[62] h-[100%] bg-main_color shadow-lg">
       <div
         onClick={() => {
           setShelf2(false);
@@ -31,6 +33,7 @@ function Sidenav2() {
           onClick={() => {
             setShelf3(true);
             setNotetype("personal");
+            router.push("/teacher/bookshelf");
           }}
           className="item flex pl-2 text-sm cursor-pointer py-2 hover:text-accent_color mb-3 items-center"
         >
@@ -43,6 +46,7 @@ function Sidenav2() {
           onClick={() => {
             setShelf3(true);
             setNotetype("school");
+            router.push("/teacher/bookshelf");
           }}
           className="item flex pl-2 text-sm cursor-pointer py-2 hover:text-accent_color mb-3 items-center"
         >

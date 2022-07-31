@@ -108,6 +108,21 @@ export const resolvers = {
       });
     },
 
+    shareNote: async (parent, { input }, context) => {
+      const data = {
+        available: input.available,
+      };
+
+      await context.prisma.teacher_Note.update({
+        where: {
+          id: input.id,
+        },
+        data,
+      });
+
+      return "done";
+    },
+
     deleteTeacherNote: async (parent, { input }, context) => {
       const noteId = {
         id: input.id,
@@ -122,10 +137,42 @@ export const resolvers = {
       return "done";
     },
 
+    deleteCourse: async (parent, { input }, context) => {
+      const courseId = {
+        id: input.id,
+      };
+
+      await context.prisma.course.delete({
+        where: {
+          id: courseId.id,
+        },
+      });
+      return "done";
+    },
+
+    deleteClass: async (parent, { input }, context) => {
+      const classId = {
+        id: input.id,
+      };
+
+      await context.prisma.class.delete({
+        where: {
+          id: classId.id,
+        },
+      });
+      return "done";
+    },
+
     createClass: async (parent, { input }, context) => {
+      const generateCode =
+        Date.now().toString(36) +
+        Math.floor(
+          Math.pow(10, 12) + Math.random() * 9 * Math.pow(10, 12)
+        ).toString(36);
       const newClass = {
         class: input.class,
         teacherId: input.teacherId,
+        classCode: generateCode,
       };
       await context.prisma.class.create({
         data: newClass,

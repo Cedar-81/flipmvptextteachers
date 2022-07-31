@@ -22,6 +22,7 @@ model Teacher {
   image String
   phoneNo String
   classes Class[]
+  stc Student_Teacher_Course[]
   createdAt DateTime @default(now())
   updatedAt DateTime 
   password String 
@@ -49,26 +50,37 @@ model Student {
 model Course {
   id String @id @default(cuid())
   course String
-  class Class[]
+  class Class? @relation(fields: [classId], references: [id], onDelete: Cascade)
+  classId String?
+  stc Student_Teacher_Course? @relation(fields: [stcId], references: [id], onDelete: Cascade)
+  stcId String?
+  note Teacher_Note[]
 }
 
 model Class { 
   id String @id @default(cuid())
   class String
   courses Course[]
+  stu Student_Teacher_Course[]
   teacher Teacher @relation(fields: [teacherId], references: [id])
   teacherId String
+  classCode String? @unique
+  note Teacher_Note[]
 }
+
 
 model Teacher_Note {
   id String @id @default(cuid())
   topic String
-  classId String[]
-  courseId String
+  class Class? @relation(fields: [classId], references: [id], onDelete: Cascade)
+  classId String?
+  course Course? @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  courseId String?
   category String
   content String
   editableContent String
   authorId String
+  available Boolean @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime 
 }
@@ -88,8 +100,10 @@ model Student_Note {
 model Student_Teacher_Course {
   id String @id @default(cuid())
   studentId String
-  classId String
-  teacherId String
-  courseList String[]
+  class Class? @relation(fields: [classId], references: [id], onDelete: Cascade)
+  classId String?
+  teacher Teacher @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  teacherId String 
+  courseList Course[]
   verified Boolean
 }

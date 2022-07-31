@@ -73,7 +73,7 @@ function Note_creator() {
   );
 
   if (loading) console.log("Creating...");
-  if (error) console.log(error);
+  if (error) console.log(JSON.stringify(error, null, 2));
 
   const inputVal = {
     authorId: teacherid,
@@ -81,7 +81,7 @@ function Note_creator() {
     category: notetype,
     content: "",
     editableContent: "",
-    classId: [classcoursedata.classId],
+    classId: classcoursedata.classId,
     courseId: classcoursedata.courseId,
   };
 

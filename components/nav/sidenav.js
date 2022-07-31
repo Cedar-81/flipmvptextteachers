@@ -14,7 +14,6 @@ function Sidenav() {
     setShelf2(true);
     if (router.query.id === undefined) {
       router.push("/teacher/bookshelf");
-      console.log(true);
     }
   };
 

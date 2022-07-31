@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useCallback, useEffect, useState } from "react";
-import "quill/dist/quill.snow.css";
+import "quill/dist/quill.bubble.css";
 import { TeacherContext } from "../../contexts/teachercontext";
 import { gql, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
@@ -20,6 +20,24 @@ const UpdateTeacherNote = gql`
     }
   }
 `;
+
+const useInterval = (callback, delay) => {
+  const savedCallback = React.useRef();
+
+  React.useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  React.useEffect(() => {
+    const tick = () => {
+      savedCallback.current();
+    };
+    if (delay !== null) {
+      let id = setInterval(tick, delay);
+      return () => clearInterval(id);
+    }
+  }, [delay]);
+};
 
 const Note = gql`
   query Note($noteId: ID!) {
@@ -46,7 +64,7 @@ const TOOLBAR_OPTIONS = [
   ["clean"],
 ];
 
-const SAVE_INTERVAL_MS = 3000;
+const SAVE_INTERVAL_MS = 5000;
 
 function Editor({ edit_content }) {
   const router = useRouter();
@@ -70,11 +88,9 @@ function Editor({ edit_content }) {
   } = useContext(TeacherContext);
   const [quill, setQuill] = useState();
   const [ready, setReady] = useState(false);
-  const [textChange, setTextChange] = useState(false);
+  const [textchange, setTextChange] = useState("");
 
   useEffect(() => setCreate(true));
-
-  let refectch = {};
 
   useEffect(() => {
     if (classcoursedata.courseId === "" || classcoursedata.classId === "") {
@@ -82,23 +98,16 @@ function Editor({ edit_content }) {
     }
   }, []);
 
-  console.log("I am here ");
-
-  if (notedata.updateNote) {
-    refectch = {
-      refetchQueries: [
-        { query: Note, variables: { noteId: router.query.id } },
-        "Note",
-      ],
-    };
-  }
-
   const [updateTeacherNote, { data, loading, error }] = useMutation(
     UpdateTeacherNote,
-    refectch
+    {
+      refetchQueries: [
+        { query: Note, variables: { noteId: creatednoteid } },
+        "Note",
+      ],
+    }
   );
 
-  if (loading) console.log("Creating...");
   if (error) console.log(JSON.stringify(error, null, 2));
 
   const inputVal = {
@@ -108,15 +117,22 @@ function Editor({ edit_content }) {
     category: notetype,
     content: notecontent,
     editableContent: JSON.stringify(editablecontent),
-    classId: [classcoursedata.classId],
+    classId: classcoursedata.classId,
     courseId: classcoursedata.courseId,
   };
 
   const save_note = async () => {
     setSavenote(true);
+    setTextChange("Saving...Just a moment");
     await updateTeacherNote({ variables: { input: inputVal } });
     setSavenote(false);
     setUpdatenotechecker(false);
+    setNotedata({
+      ...notedata,
+      updateNote: false,
+      updateContent: "",
+      ready: false,
+    });
     router.push("/teacher/bookshelf/" + notetype + "/" + creatednoteid);
   };
 
@@ -124,23 +140,9 @@ function Editor({ edit_content }) {
     if (updatenotechecker) {
       save_note();
     }
-    if (notedata.updateNote) {
-      updateTeacherNote({ variables: { input: inputVal } });
-    }
-    if (notedata.ready) {
-      if (quill !== undefined) {
-        quill.on("text-change", (delta, oldDelta, source) => {
-          if (source == "user") {
-            updateTeacherNote({ variables: { input: inputVal } });
-          }
-        });
-      }
-    }
-  }, [notetitle, editablecontent, notecontent, quill]);
-  console.log("created id", creatednoteid);
+  }, []);
 
   useEffect(() => {
-    console.log("bla bla bla", notedata.ready, notedata.updateNote);
     if (quill !== undefined && notedata.updateNote) {
       quill.root.innerHTML = notedata.updateContent;
       quill.enable();
@@ -171,7 +173,7 @@ function Editor({ edit_content }) {
     if (typeof document !== "undefined") {
       let Quill = load_quill();
       const q = new Quill(editor, {
-        theme: "snow",
+        theme: "bubble",
         modules: { toolbar: TOOLBAR_OPTIONS },
       });
       setQuill(q);
@@ -186,12 +188,13 @@ function Editor({ edit_content }) {
     <>
       {savenote && (
         <div className="w-full flex items-center justify-center border-2">
-          <p className="fixed py-2 text-xs px-4 text-center mx-auto shadow-lg bg-accent_color text-main_color top-[17%]">
-            Saving... Just a moment
+          <p className="fixed py-2 text-xs z-[55] px-4 text-center mx-auto shadow-lg bg-accent_color text-main_color top-[17%]">
+            {textchange}
           </p>
         </div>
       )}
       <div className="container" ref={wrapperRef}></div>
+
       <button
         onClick={save_note}
         className="fixed right-9 bottom-8 w-[6rem] h-[2.5rem] rounded-md bg-accent_color text-main_color cursor-pointer border-2"

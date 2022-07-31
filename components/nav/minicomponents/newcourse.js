@@ -2,12 +2,6 @@ import React, { useContext, useState } from "react";
 import { TeacherContext } from "../../contexts/teachercontext";
 import { gql, useMutation } from "@apollo/client";
 
-const CreateClass = gql`
-  mutation CreateClass($input: createClassInput) {
-    createClass(input: $input)
-  }
-`;
-
 const CreateCourse = gql`
   mutation CreateCourse($input: createCourseInput) {
     createCourse(input: $input)
@@ -18,8 +12,6 @@ const TeacherClassCourse = gql`
   query Teacher($teacherId: ID!) {
     teacher(teacherId: $teacherId) {
       classes {
-        id
-        class
         courses {
           id
           course
@@ -29,12 +21,12 @@ const TeacherClassCourse = gql`
   }
 `;
 
-function Newclass() {
-  const { setClasscoursedata, classcoursedata, teacherid } =
+function Newcourse() {
+  const { setClasscoursedata, classcoursedata, teacherid, setAction } =
     useContext(TeacherContext);
-  const [classname, setClassName] = useState("Unnamed");
+  const [coursename, setCourseName] = useState("");
 
-  const [create_class, { data, loading, error }] = useMutation(CreateClass, {
+  const [create_course, { data, loading, error }] = useMutation(CreateCourse, {
     refetchQueries: [
       { query: TeacherClassCourse, variables: { teacherId: teacherid } },
       "Teacher",
@@ -45,8 +37,8 @@ function Newclass() {
   if (error) console.log(JSON.stringify(error, null, 2));
 
   const inputVal = {
-    class: classname,
-    teacherId: teacherid,
+    course: coursename,
+    classId: classcoursedata.classId,
   };
 
   const create = async () => {
@@ -56,7 +48,8 @@ function Newclass() {
       working: true,
       workingText: "Creating...",
     });
-    await create_class({ variables: { input: inputVal } });
+    setAction("Class");
+    await create_course({ variables: { input: inputVal } });
     setClasscoursedata({
       ...classcoursedata,
       action: "",
@@ -76,13 +69,13 @@ function Newclass() {
           </span>
         </div>
         <p className="text-xl text-center mx-auto max-w-full overflow-hidden">
-          Create Class
+          {/* {notetitle} */}
         </p>
         <input
           type={"text"}
-          onChange={(e) => setClassName(e.target.value)}
+          onChange={(e) => setCourseName(e.target.value)}
           className="w-full h-10 px-2 mt-[1.2rem] focus:shadow-lg focus:bg-main_color rounded-md outline-none"
-          placeholder="Enter new classname"
+          placeholder="Enter new coursename"
         />
         <div className="w-full flex justify-end">
           <button
@@ -97,4 +90,4 @@ function Newclass() {
   );
 }
 
-export default Newclass;
+export default Newcourse;

@@ -64,23 +64,13 @@ function Displaynote() {
 
   if (!notedata.updateNote) setCreate(false);
 
-  async function save_note_update() {
-    setUpdatenotechecker(true);
-    await setNotedata({
-      ...notedata,
-      updateNote: false,
-      updateContent: "",
-      ready: false,
-    });
-  }
-
   return (
     <>
       {!notedata.updateNote && (
         <>
           <div className="note_container mt-[6%] m-2 w-[8.5in] mx-auto bg-accent_bkg_color shadow-xl rounded-xl p-4 min-h-full">
             <p className="date text-sm text-accent_color font-medium">
-              {moment(val?.updatedAt).format("LL")}
+              {moment(new Date(+val?.updatedAt)).format("LL")}
             </p>
             <div className="content mt-4">
               <h2 className="note_heading text-2xl font-medium">
@@ -97,14 +87,6 @@ function Displaynote() {
         </>
       )}
       {notedata.updateNote && <Editor />}
-      {notedata.updateNote && (
-        <button
-          onClick={save_note_update}
-          className="fixed right-9 bottom-8 w-[6rem] h-[2.5rem] rounded-md bg-accent_color text-main_color cursor-pointer border-2"
-        >
-          Done
-        </button>
-      )}
     </>
   );
 }
