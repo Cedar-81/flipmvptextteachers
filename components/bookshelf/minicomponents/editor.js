@@ -197,7 +197,7 @@ function Editor({ edit_content }) {
 
       <button
         onClick={save_note}
-        className="fixed right-9 bottom-8 w-[6rem] h-[2.5rem] rounded-md bg-accent_color text-main_color cursor-pointer border-2"
+        className="fixed right-9 bottom-8 w-[6rem] h-[2.5rem] z-[60] rounded-md bg-accent_color text-main_color cursor-pointer border-2"
       >
         Done
       </button>
