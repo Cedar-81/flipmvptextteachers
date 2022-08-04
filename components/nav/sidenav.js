@@ -65,7 +65,9 @@ function Sidenav() {
           onClick={show_shelf}
           className="icon_con flex mx-1 px-4 rounded-md items-center text-center py-2 hover:text-dark_color text-dark_color_2 cursor-pointer mt-4 hover:bg-accent_bkg_hover"
         >
-          <span class="material-symbols-outlined text-[30px]">summarize</span>
+          <span className="material-symbols-outlined text-[30px]">
+            summarize
+          </span>
           <p className="text-base font-medium ml-4">Notes</p>
         </div>
         <div
@@ -76,7 +78,9 @@ function Sidenav() {
           }}
           className="icon_con flex mx-1 px-4 rounded-md items-center text-center py-2 hover:text-dark_color text-dark_color_2 cursor-pointer mt-2 hover:bg-accent_bkg_hover"
         >
-          <span class="material-symbols-outlined text-[30px]">settings</span>
+          <span className="material-symbols-outlined text-[30px]">
+            settings
+          </span>
           <p className="text-base font-medium ml-4">Settings</p>
         </div>
       </div>
