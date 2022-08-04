@@ -1,34 +1,25 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Flip Classroom
 
-## Getting Started
+This is a prototype of Flip classroom which would be launched shoon
 
-First, run the development server:
+### How to get started
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+When you hop on the teachers view, first you click on the button highlighted button ![topbar](https://user-images.githubusercontent.com/64336732/182038849-ef5112e8-0b0d-462b-84ed-26df308dbf74.png)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+and select or add a class,
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+When you have selected the class, select a course.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+![{6D48CB80-8AE7-496F-A303-5C57FC142964}](https://user-images.githubusercontent.com/64336732/182039154-f10fd3e6-f171-4323-8fc0-d55fef703cc6.png)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Second, click the bookshelf icon(highlighted in yellow) on the sidebar and select a section to create a note, either in the personal or school section or read notes if you have one already.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+When a note is selected to read click the more botton in the bottom rght and select any of the buttons that pop up to either, update, share or delete a note.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+To update your profile click on the settings icon(highlightd in purple) and click on personal, the student manage tab isn't working currently and wouldn't be added to the mvp, feel free to ignore that part
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Note: 
+When classes are created they are private until they are shared by clicking the share button and sharing class code to students
+Notes in the school section are private, until they are shared they remain private to teachers.
