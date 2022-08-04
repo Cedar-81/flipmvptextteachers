@@ -49,7 +49,7 @@ function Topnav() {
   }, [teacherprofile, data]);
 
   return (
-    <div className="topnav fixed md:w-[95%] z-[60] top-0 flex justify-between h-[6rem] md:h-[10%] items-center w-full shadow-md md:px-8 bg-accent_bkg_color">
+    <div className="topnav py-2 relative md:w-full z-[60] top-0 flex justify-between h-[7rem] md:h-[10%] items-center w-full shadow-md md:px-8 bg-accent_bkg_color">
       {create && (
         <input
           placeholder="Untitled"
@@ -66,32 +66,35 @@ function Topnav() {
         </h1>
       )}
       <div className="right flex justify-between md:w-max w-full md:flex-row-reverse ">
-        <div className="profile flex md:flex-row-reverse items-center">
+        <div className="profile flex md:flex items-center">
           <div
             onClick={() => {
               setTopbaraction("Personal");
-              router.push("/student/settings");
+              router.push("/teacher/settings");
             }}
             id="profile_img"
-            className="profile_img rounded-full cursor-pointer bg-no-repeat bg-cover bg-center h-[3rem] md:h-10 md:w-10 ml-4 w-[3rem] bg-main_color shadow-md"
+            className="profile_img rounded-full cursor-pointer bg-no-repeat bg-cover bg-center h-[3rem] md:h-9 md:w-9 ml-4 w-[3rem] bg-main_color shadow-lg border-[1px] border-accent_color"
           ></div>
-          <h2 className="greeting font-medium text-[2rem] md:text-[1rem] w-max ml-2">
-            Hello, {val}!
+          <h2 className="greeting font-medium text-[2rem] md:text-sm w-max ml-2">
+            Hello, {" " + val.length > 8 ? val.substring(0, 8) + "..." : val}!
           </h2>
         </div>
 
-        <div className="icons md:mr-8 mr-4 flex justify-between w-[9rem] md:w-[6rem]">
+        <div className="icons mr-4 flex justify-between w-[9rem] md:w-max">
           <div
             onClick={() => {
               toggle_class_course();
             }}
-            className="icon_con rounded-full h-8 w-8 cursor-pointer bg-main_color flex justify-center items-center shadow-md p-[19px]"
+            className="flex-row items-center text-center cursor-pointer"
           >
-            <span className="material-symbols-outlined text-accent_color">
-              edit_attributes
+            <span className="material-icons text-accent_bkg_hover hover:text-accent_color rounded-full">
+              add_circle
             </span>
+            <p className="classes text-xs mt-[-5px] hover:text-accent_color">
+              Classes
+            </p>
           </div>
-          <div
+          {/* <div
             onClick={() => {
               toggle_notification();
             }}
@@ -100,7 +103,7 @@ function Topnav() {
             <span className="material-symbols-outlined text-accent_color ">
               notifications
             </span>
-          </div>
+          </div> */}
           <div
             onClick={() => toggle_menu()}
             className="icon_con rounded-full h-8 w-8 md:hidden cursor-pointer bg-main_color flex justify-center items-center shadow-md p-[19px]"

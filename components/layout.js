@@ -44,7 +44,7 @@ function Layout({ children }) {
           {shelf3 && <Sidenav3 />}
         </div>
       </div>
-      <div className="w-[100vw] md:w-[95%] md:ml-[5%]">
+      <div className="w-[100vw] md:w-[95%] overflow-y-hidden">
         <Topnav />
         <div className=" h-full pb-4">
           {notification && <Notifications />}
@@ -56,7 +56,7 @@ function Layout({ children }) {
           {ccdaction === "share_class" && <Shareclass />}
           {ccdaction === "share_note" && <Note_share />}
           {notedata.deleteNote && <Note_deletor />}
-          <div className=" bg-accent_bkg_color relative top-[10%] w-full md:static md:top-0">
+          <div className=" bg-accent_bkg_color relative h-full overflow-y-auto w-full md:static md:top-0">
             {children}
           </div>
         </div>

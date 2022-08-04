@@ -72,6 +72,9 @@ function Displaynote() {
             <p className="date text-sm text-accent_color font-medium">
               {moment(new Date(+val?.updatedAt)).format("LL")}
             </p>
+            <p className="date text-sm mt-1 text-accent_color font-medium">
+              Status: <span className="font-bold">Shared</span>
+            </p>
             <div className="content mt-4">
               <h2 className="note_heading text-2xl font-medium">
                 {val?.topic}

@@ -7,7 +7,7 @@ function Settingcon() {
   const { setTopbaraction, topbaraction } = useContext(TeacherContext);
 
   return (
-    <div className=" pt-[9%] w-[80%] min-h-full mx-auto">
+    <div className=" pt-4 w-[80%] min-h-full mx-auto">
       {topbaraction == "Settings" && (
         <>
           <div
@@ -23,7 +23,7 @@ function Settingcon() {
               </span>
             </div>
           </div>
-          <div
+          {/* <div
             onClick={() => {
               setTopbaraction("Manage Students");
             }}
@@ -35,7 +35,7 @@ function Settingcon() {
                 arrow_drop_down
               </span>
             </div>
-          </div>
+          </div> */}
         </>
       )}
 

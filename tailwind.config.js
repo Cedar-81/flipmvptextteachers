@@ -14,6 +14,9 @@ module.exports = {
       accent_color_2: "rgba(242, 29, 29, 0.18)",
       accent_bkg_color: "#eef1f6",
       accent_bkg_dark_color: "#c4c4c4",
+      sidenav_bkg_color: "#EEF1F6",
+      accent_bkg_hover: "rgba(242, 29, 29, 0.6)",
+      dark_color_2: "#6F6F6F",
     },
     extend: {
       boxShadow: {

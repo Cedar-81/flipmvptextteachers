@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useCallback, useEffect, useState } from "react";
-import "quill/dist/quill.bubble.css";
+import "quill/dist/quill.snow.css";
 import { TeacherContext } from "../../contexts/teachercontext";
 import { gql, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
@@ -173,7 +173,7 @@ function Editor({ edit_content }) {
     if (typeof document !== "undefined") {
       let Quill = load_quill();
       const q = new Quill(editor, {
-        theme: "bubble",
+        theme: "snow",
         modules: { toolbar: TOOLBAR_OPTIONS },
       });
       setQuill(q);

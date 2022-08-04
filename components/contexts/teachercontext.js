@@ -21,6 +21,8 @@ function Teachercontextprovider({ children }) {
     classId: "",
     courseId: "",
     action: "",
+    className: "",
+    courseName: "",
     working: false,
     workingText: "",
     classCode: "",

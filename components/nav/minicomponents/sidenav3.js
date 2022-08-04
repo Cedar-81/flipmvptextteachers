@@ -87,9 +87,11 @@ function Sidenav3() {
       <p
         key={index}
         onClick={() => read_note(val.id)}
-        className="text hover:text-accent_color cursor-pointer py-2"
+        className="text hover:text-main_color hover:bg-accent_bkg_hover mx-1 rounded-md px-2 cursor-pointer py-2"
       >
-        {val.topic}
+        {val.topic.length > 20 && val.id !== "123"
+          ? val.topic.substring(0, 20) + "..."
+          : val.topic}
       </p>
     );
   });
@@ -123,10 +125,10 @@ function Sidenav3() {
   };
 
   return (
-    <div className="w-[15%]  overflow-y-auto fixed ml-[20%] z-[61] h-[100%] bg-main_color shadow-lg">
+    <div className="w-[12rem]  overflow-y-auto z-[61] h-[100%] bg-sidenav_bkg_color shadow-lg">
       <div
         onClick={() => setShelf3(false)}
-        className="icon_con bg-main_color mt-4 w-full sticky top-1 cursor-pointer text-right"
+        className="icon_con bg-sidenav_bkg_color mt-4 w-full sticky top-1 cursor-pointer text-right"
       >
         <span className="material-icons text-sm text-accent_color">
           arrow_back_ios
@@ -137,7 +139,7 @@ function Sidenav3() {
           onClick={() => {
             new_note();
           }}
-          className="new_con flex sticky bg-main_color top-5 text-sm items-center py-2 px-2 mt-11 cursor-pointer hover:text-accent_color"
+          className="new_con flex sticky bg-sidenav_bkg_color top-5 text-sm items-center py-2 px-2 mt-11 cursor-pointer hover:text-accent_color"
         >
           <span className="material-icons text-accent_color">edit</span>
           <p className="text ml-3 font-semibold">Create</p>
