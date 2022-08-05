@@ -433,7 +433,7 @@ export const resolvers = {
 
     signIn: async (parent, { input }, context) => {
       const cookies = new Cookies(context.req, context.res);
-      const env = process.env.NEXT_PUBLIC_NODE_ENV;
+      const env = process.env.NODE_ENV;
       try {
         const val = await context.prisma.teacher.findUnique({
           where: {
@@ -468,10 +468,7 @@ export const resolvers = {
               path: "/",
               maxAge: 3600 * 24 * 7,
               sameSite: "strict",
-              secure:
-                process.env.NEXT_PUBLIC_NODE_ENV === "production"
-                  ? true
-                  : false,
+              secure: env === "production" ? true : false,
             }
           );
 
