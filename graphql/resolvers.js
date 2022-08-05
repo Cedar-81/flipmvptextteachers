@@ -468,7 +468,7 @@ export const resolvers = {
               path: "/",
               maxAge: 3600 * 24 * 7,
               sameSite: "strict",
-              secure: env === "production" ? true : false,
+              secure: process.env.NODE_ENV === "production" ? true : false,
             }
           );
 
