@@ -46,6 +46,7 @@ function Signin() {
   };
 
   const signin = async () => {
+    console.log(NEXT_PUBLIC_JWT_COOKIE_TOKEN);
     const inputVal = {
       email,
       password,
@@ -77,7 +78,7 @@ function Signin() {
 
     setPassword("");
     setEmail("");
-    return setIsAuth(true), router.push("/student/bookshelf");
+    return setIsAuth(true), router.push("/teacher/bookshelf");
 
     setTimeout(() => {
       setErrorMsg("");
