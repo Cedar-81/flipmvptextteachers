@@ -462,7 +462,7 @@ export const resolvers = {
 
           cookies.set(
             "auth",
-            access(process.env.NEXT_PUBLIC_JWT_COOKIE_TOKEN, "7d"),
+            access(`${process.env.NEXT_PUBLIC_JWT_COOKIE_TOKEN}`, "7d"),
             {
               httpOnly: true,
               path: "/",
