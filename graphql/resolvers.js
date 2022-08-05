@@ -462,7 +462,7 @@ export const resolvers = {
 
           cookies.set(
             "auth",
-            access(`${process.env.NEXT_PUBLIC_JWT_COOKIE_TOKEN}`, "7d"),
+            access(process.env.NEXT_PUBLIC_JWT_COOKIE_TOKEN, "7d"),
             {
               httpOnly: true,
               path: "/",
@@ -471,7 +471,6 @@ export const resolvers = {
               secure: process.env.NODE_ENV === "production" ? true : false,
             }
           );
-
           console.log(isAuth(context.req));
           return "Verified";
         }
