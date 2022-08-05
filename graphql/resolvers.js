@@ -475,7 +475,6 @@ export const resolvers = {
           return "Verified";
         }
       } catch (e) {
-        return e;
         return "Failed";
       }
     },
