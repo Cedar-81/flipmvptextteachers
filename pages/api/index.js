@@ -1,15 +1,26 @@
-import { ApolloServer } from "apollo-server-micro/dist/ApolloServer";
+import { ApolloServer } from "apollo-server-micro";
 import { typeDefs } from "../../graphql/schema";
 import { resolvers } from "../../graphql/resolvers";
 import Cors from "micro-cors";
-import { createContext } from "../../graphql/context";
+import prisma from "../../lib/prismaClient";
 
-const cors = Cors();
+const cors = Cors({
+  origin: "https://studio.apollographql.com",
+  credentials: true,
+});
 
 const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
-  context: createContext,
+  context: ({ req, res }) => {
+    return {
+      req,
+      res,
+      prisma,
+    };
+  },
+  csrfPrevention: true,
+  cache: "bounded",
 });
 
 const startServer = apolloServer.start();

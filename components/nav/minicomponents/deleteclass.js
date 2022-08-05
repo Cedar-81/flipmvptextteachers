@@ -61,6 +61,7 @@ function Deleteclass() {
     setClasscoursedata({
       ...classcoursedata,
       classId: "",
+      className: "",
       working: true,
       workingText: "Deleting...",
     });

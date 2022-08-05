@@ -13,6 +13,7 @@ export const typeDefs = gql`
     ): [Teacher_Note]!
     note(id: ID!): Teacher_Note
     courses: [Course]!
+    auth: String
   }
 
   type Mutation {
@@ -25,6 +26,9 @@ export const typeDefs = gql`
     deleteClass(input: deleteClassInput): String
     deleteCourse(input: deleteCourseInput): String
     shareNote(input: shareNoteInput): String
+    createTeacher(input: createTeacherInput): String
+    verifyEmail(input: verifyEmailInput): String
+    signIn(input: signInInput): String
   }
 
   type Class {
@@ -67,6 +71,32 @@ export const typeDefs = gql`
   type Course {
     id: String!
     course: String
+  }
+
+  input createTeacherInput {
+    firstName: String
+    lastName: String
+    address: String
+    state: String
+    country: String
+    postalCode: String
+    email: String
+    image: String
+    dateOfBirth: String
+    phoneNo: String
+    class: String
+    emailCode: String
+    updatedAt: String
+    password: String
+  }
+
+  input signInInput {
+    email: String!
+    password: String!
+  }
+
+  input verifyEmailInput {
+    code: String!
   }
 
   input updateTeacherProfileInput {

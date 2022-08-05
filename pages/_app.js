@@ -4,6 +4,7 @@ import Layout from "../components/layout";
 import "../styles/globals.css";
 import { ApolloProvider } from "@apollo/client";
 import apolloClient from "../lib/apolloClient";
+import { Authcontextprovider } from "../components/contexts/authcontext";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -25,11 +26,13 @@ function MyApp({ Component, pageProps }) {
         />
       </Head>
       <ApolloProvider client={apolloClient}>
-        <Teachercontextprovider>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </Teachercontextprovider>
+        <Authcontextprovider>
+          <Teachercontextprovider>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </Teachercontextprovider>
+        </Authcontextprovider>
       </ApolloProvider>
     </>
   );
