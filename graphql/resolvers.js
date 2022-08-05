@@ -7,15 +7,18 @@ const nodemailer = require("nodemailer");
 const sendEmail = async (val) => {
   let testAccount = await nodemailer.createTestAccount();
   var smtpTransport = require("nodemailer-smtp-transport");
-  console.log(process.env.APP_EMAIL, process.env.APP_PASSWORD);
+  console.log(
+    process.env.NEXT_PUBLIC_APP_EMAIL,
+    process.env.NEXT_PUBLIC_APP_PASSWORD
+  );
   // create reusable transporter object using the default SMTP transport
   let transporter = nodemailer.createTransport(
     smtpTransport({
       service: "gmail",
       host: "smtp.gmail.com",
       auth: {
-        user: `${process.env.APP_EMAIL}`, // generated ethereal user
-        pass: `${process.env.APP_PASSWORD}`, // generated ethereal password
+        user: `${process.env.NEXT_PUBLIC_APP_EMAIL}`, // generated ethereal user
+        pass: `${process.env.NEXT_PUBLIC_APP_PASSWORD}`, // generated ethereal password
       },
       tls: {
         rejectUnauthorized: false,
@@ -430,7 +433,7 @@ export const resolvers = {
 
     signIn: async (parent, { input }, context) => {
       const cookies = new Cookies(context.req, context.res);
-      const env = process.env.NODE_ENV;
+      const env = process.env.NEXT_PUBLIC_NODE_ENV;
       try {
         const val = await context.prisma.teacher.findUnique({
           where: {
@@ -457,13 +460,20 @@ export const resolvers = {
             });
           };
 
-          cookies.set("auth", access(process.env.JWT_COOKIE_TOKEN, "7d"), {
-            httpOnly: true,
-            path: "/",
-            maxAge: 3600 * 24 * 7,
-            sameSite: "strict",
-            secure: process.env.NODE_ENV === "production" ? true : false,
-          });
+          cookies.set(
+            "auth",
+            access(process.env.NEXT_PUBLIC_JWT_COOKIE_TOKEN, "7d"),
+            {
+              httpOnly: true,
+              path: "/",
+              maxAge: 3600 * 24 * 7,
+              sameSite: "strict",
+              secure:
+                process.env.NEXT_PUBLIC_NODE_ENV === "production"
+                  ? true
+                  : false,
+            }
+          );
 
           console.log(isAuth(context.req));
           return "Verified";

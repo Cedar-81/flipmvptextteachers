@@ -2,7 +2,10 @@ import { verify } from "jsonwebtoken";
 
 export default function isAuth(req) {
   try {
-    const payload = verify(req.cookies.auth, `${process.env.JWT_COOKIE_TOKEN}`);
+    const payload = verify(
+      req.cookies.auth,
+      `${process.env.NEXT_PUBLIC_JWT_COOKIE_TOKEN}`
+    );
     console.log("🚀 ~ file: isAuth.js ~ line 5 ~ isAuth ~ payload", payload);
     return {
       payload,
