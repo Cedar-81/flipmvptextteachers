@@ -432,7 +432,7 @@ export const resolvers = {
     },
 
     signIn: async (parent, { input }, context) => {
-      const cookies = new Cookies(context.req, context.res);
+      const cookies = new Cookies(context.req, context.res, { secure: true });
       const env = process.env.NODE_ENV;
       try {
         const val = await context.prisma.teacher.findUnique({
