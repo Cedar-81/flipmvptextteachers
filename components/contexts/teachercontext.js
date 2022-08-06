@@ -79,6 +79,46 @@ function Teachercontextprovider({ children }) {
     setClass_course(false);
   }
 
+  console.log("cc", classcoursedata);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      let data = window.localStorage.getItem("FLIP_CLASSROOM_STATE_TEACHER");
+      if (data !== null) {
+        data = JSON.parse(data);
+        setClasscoursedata({
+          ...class_course,
+          classId: data.classId,
+          courseId: data.courseId,
+          action: data.action,
+          className: data.className,
+          courseName: data.courseName,
+        });
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    let values = {
+      classId: "",
+      courseId: "",
+      action: "",
+      className: "",
+      courseName: "",
+    };
+    if (typeof window != "undefined") {
+      values.classId = classcoursedata.classId;
+      values.courseId = classcoursedata.courseId;
+      values.action = classcoursedata.action;
+      values.className = classcoursedata.className;
+      values.courseName = classcoursedata.courseName;
+      return window.localStorage.setItem(
+        "FLIP_CLASSROOM_STATE_TEACHER",
+        JSON.stringify(values)
+      );
+    }
+  }, [classcoursedata]);
+
   const value = {
     notification,
     toggle_notification,

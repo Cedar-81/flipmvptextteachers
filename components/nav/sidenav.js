@@ -55,7 +55,7 @@ function Sidenav() {
               classcoursedata.courseName.length > 7
                 ? classcoursedata.courseName.substring(0, 7) + "..."
                 : classcoursedata.courseName}
-              {classcoursedata.className === "" && "Select C..."}
+              {classcoursedata.courseName.trim().length === 0 && "Select C..."}
             </span>
           </p>
         </div>

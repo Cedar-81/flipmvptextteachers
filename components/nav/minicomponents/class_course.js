@@ -49,7 +49,8 @@ function Class_course() {
             setClasscoursedata((prev) => {
               return {
                 ...prev,
-                courseId: "",
+                courseId: prev.classId !== val.classId ? "" : prev.courseId,
+                courseName: prev.classId !== val.classId ? "" : prev.courseName,
                 classId: val.id,
                 classCode: val.classCode,
                 className: val.class,
