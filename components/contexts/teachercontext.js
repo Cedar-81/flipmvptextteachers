@@ -79,8 +79,6 @@ function Teachercontextprovider({ children }) {
     setClass_course(false);
   }
 
-  console.log("cc", classcoursedata);
-
   useEffect(() => {
     if (typeof window !== "undefined") {
       let data = window.localStorage.getItem("FLIP_CLASSROOM_STATE_TEACHER");
