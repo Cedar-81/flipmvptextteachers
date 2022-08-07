@@ -14,7 +14,7 @@ function Teachercontextprovider({ children }) {
   const [shelf3, setShelf3] = useState(false);
   const [updatenotechecker, setUpdatenotechecker] = useState(false);
   const [bookshelfbuttons, setBookshelfbuttons] = useState({
-    toggle_components: false,
+    toggle_components: true,
     show_editor: false,
   });
   const [classcoursedata, setClasscoursedata] = useState({
