@@ -22,7 +22,7 @@ function Signin() {
 
   const router = useRouter();
 
-  const { setIsAuth } = useContext(AuthContext);
+  const { setIsAuth, isAuth } = useContext(AuthContext);
 
   useEffect(() => {
     if (isAuth) {
