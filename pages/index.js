@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 function Home() {
   const router = useRouter();
   useEffect(() => {
-    router.push("/teacher/bookshelf");
+    router.push("/teacher");
   }, []);
   return <div className=" bg-accent_bkg_color h-full ">Home</div>;
 }

@@ -24,6 +24,12 @@ function Signin() {
 
   const { setIsAuth } = useContext(AuthContext);
 
+  useEffect(() => {
+    if (isAuth) {
+      router.push("/student/bookshelf");
+    }
+  }, []);
+
   const [login_teacher, { data, loading, error }] = useMutation(loginTeacher);
   const [btntxt, setBtntxt] = useState("Sign In");
   const [err_msg, setErrorMsg] = useState("");
@@ -56,7 +62,7 @@ function Signin() {
     const login = await login_teacher({
       variables: { input: inputVal },
     });
-    console.log(login);
+
     if (login.data.signIn === "Failed") {
       return (
         setErrorMsg("Invalid email or password, please try again"),
