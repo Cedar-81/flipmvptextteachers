@@ -66,7 +66,11 @@ function Verification() {
         </p>
         <p className="text-xs text-left mt-1">
           Enter verification code that has been sent to you via your email upon
-          sign up
+          sign up <br />
+          <span className="text-xs text-accent_color">
+            Please do check your spam if you can't find the verification email
+            from us.
+          </span>
         </p>
         <p className="text-xs text-center mt-8 mb-1 font-semibold text-accent_color">
           {err_msg}
