@@ -424,7 +424,7 @@ export const resolvers = {
           });
           return "Verified";
         } catch (error) {
-          console.log(error);
+          return "Failed";
         }
       } catch (e) {
         return "Failed";
@@ -461,7 +461,7 @@ export const resolvers = {
           };
 
           cookies.set(
-            "auth",
+            "flip_classroom_auth_teachers",
             access(`${process.env.NEXT_PUBLIC_JWT_COOKIE_TOKEN}`, "7d"),
             {
               httpOnly: true,

@@ -3,7 +3,7 @@ import { verify } from "jsonwebtoken";
 export default function isAuth(req) {
   try {
     const payload = verify(
-      req.cookies.auth,
+      req.cookies.flip_classroom_auth_teachers,
       `${process.env.NEXT_PUBLIC_JWT_COOKIE_TOKEN}`
     );
     console.log("🚀 ~ file: isAuth.js ~ line 5 ~ isAuth ~ payload", payload);
