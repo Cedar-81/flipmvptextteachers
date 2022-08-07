@@ -68,8 +68,8 @@ function Verification() {
           Enter verification code that has been sent to you via your email upon
           sign up <br />
           <span className="text-xs text-accent_color">
-            Please do check your spam if you can't find the verification email
-            from us.
+            {`Please do check your spam if you can't find the verification email
+            from us.`}
           </span>
         </p>
         <p className="text-xs text-center mt-8 mb-1 font-semibold text-accent_color">
