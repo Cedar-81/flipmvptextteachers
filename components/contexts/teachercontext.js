@@ -44,6 +44,7 @@ function Teachercontextprovider({ children }) {
   const [creatednoteid, setCreatednoteid] = useState("");
   const [savenote, setSavenote] = useState(false);
   const [action, setAction] = useState("Class");
+  const [teachername, setTeachername] = useState("");
   const [teacherid, setTeacherid] = useState("cl60fwtlx0056dckskcuwnjey");
   const [teacherprofile, setTeacherprofile] = useState({
     firstname: "",
@@ -165,6 +166,8 @@ function Teachercontextprovider({ children }) {
     setAction,
     ccdaction,
     setCcdaction,
+    teachername,
+    setTeachername,
   };
 
   return (

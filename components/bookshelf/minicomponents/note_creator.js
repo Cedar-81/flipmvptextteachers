@@ -39,6 +39,8 @@ function Note_creator() {
     notetype,
     setCreatednoteid,
     setCreate,
+    setShelf2,
+    setShelf3,
   } = useContext(TeacherContext);
 
   useEffect(() => {
@@ -72,9 +74,6 @@ function Note_creator() {
     }
   );
 
-  if (loading) console.log("Creating...");
-  if (error) console.log(JSON.stringify(error, null, 2));
-
   const inputVal = {
     authorId: teacherid,
     topic: notetitle,
@@ -86,11 +85,12 @@ function Note_creator() {
   };
 
   const create = () => {
-    console.log("here again");
     setCreatetype("editor");
     addTeacherNote({ variables: { input: inputVal } });
-    console.log("data", data);
   };
+
+  setShelf2(false);
+  setShelf3(false);
 
   return (
     <div className="w-full h-[100vh] fixed top-0 z-50 bg-dark_color">

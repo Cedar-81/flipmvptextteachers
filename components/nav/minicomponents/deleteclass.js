@@ -36,6 +36,8 @@ function Deleteclass() {
     setClasscoursedata,
     setAction,
     setCcdaction,
+    setShelf2,
+    setShelf3,
   } = useContext(TeacherContext);
 
   const router = useRouter();
@@ -73,6 +75,9 @@ function Deleteclass() {
       working: false,
     });
   };
+
+  setShelf2(false);
+  setShelf3(false);
 
   return (
     <div className="w-full h-[100vh] fixed top-0 z-50 bg-dark_color">

@@ -15,6 +15,7 @@ const Note = gql`
       editableContent
       updatedAt
       authorId
+      available
     }
   }
 `;
@@ -25,12 +26,12 @@ function Displaynote() {
     setCreate,
     creatednoteid,
     notedata,
+    notetype,
     setNotedata,
     setUpdatenotechecker,
     classcoursedata,
   } = useContext(TeacherContext);
 
-  console.log(creatednoteid);
   const { data, error, loading } = useQuery(Note, {
     variables: {
       noteId: creatednoteid,
@@ -55,9 +56,7 @@ function Displaynote() {
       content: "loading...",
     };
   }
-  if (error) {
-    console.log(JSON.stringify(error, null, 2));
-  }
+
   if (data) {
     val = data.note;
   }
@@ -68,13 +67,18 @@ function Displaynote() {
     <>
       {!notedata.updateNote && (
         <>
-          <div className="note_container mt-[6%] m-2 w-[8.5in] mx-auto bg-accent_bkg_color shadow-xl rounded-xl p-4 min-h-full">
+          <div className="note_container m-2 w-[8.5in] mx-auto bg-accent_bkg_color shadow-xl rounded-xl p-4 min-h-full">
             <p className="date text-sm text-accent_color font-medium">
               {moment(new Date(+val?.updatedAt)).format("LL")}
             </p>
-            <p className="date text-sm mt-1 text-accent_color font-medium">
-              Status: <span className="font-bold">Shared</span>
-            </p>
+            {notetype === "school" && (
+              <p className="date text-sm mt-1 text-accent_color font-medium">
+                Status:{" "}
+                <span className="font-bold">
+                  {val?.available ? "Shared" : "Unshared"}
+                </span>
+              </p>
+            )}
             <div className="content mt-4">
               <h2 className="note_heading text-2xl font-medium">
                 {val?.topic}

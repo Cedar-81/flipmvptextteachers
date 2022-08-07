@@ -37,6 +37,8 @@ function Note_deletor() {
     setCreate,
     notedata,
     setNotedata,
+    setShelf2,
+    setShelf3,
   } = useContext(TeacherContext);
 
   const router = useRouter();
@@ -75,6 +77,9 @@ function Note_deletor() {
     });
     router.push("/teacher/bookshelf");
   };
+
+  setShelf2(false);
+  setShelf3(false);
 
   return (
     <div className="w-full h-[100vh] fixed top-0 z-50 bg-dark_color">

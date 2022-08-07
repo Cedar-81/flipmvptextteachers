@@ -30,8 +30,13 @@ const TeacherClassCourse = gql`
 `;
 
 function Newclass() {
-  const { setClasscoursedata, classcoursedata, teacherid } =
-    useContext(TeacherContext);
+  const {
+    setClasscoursedata,
+    classcoursedata,
+    teacherid,
+    setShelf2,
+    setShelf3,
+  } = useContext(TeacherContext);
   const [classname, setClassName] = useState("Unnamed");
 
   const [create_class, { data, loading, error }] = useMutation(CreateClass, {
@@ -40,9 +45,6 @@ function Newclass() {
       "Teacher",
     ],
   });
-
-  if (loading) console.log("Creating...");
-  if (error) console.log(JSON.stringify(error, null, 2));
 
   const inputVal = {
     class: classname,
@@ -63,6 +65,9 @@ function Newclass() {
       working: false,
     });
   };
+
+  setShelf2(false);
+  setShelf3(false);
 
   return (
     <div className="w-full h-[100vh] fixed top-0 z-50 bg-dark_color">

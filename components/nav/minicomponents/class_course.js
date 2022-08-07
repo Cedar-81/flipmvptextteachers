@@ -28,6 +28,8 @@ function Class_course() {
     action,
     setAction,
     setCcdaction,
+    setShelf2,
+    setShelf3,
   } = useContext(TeacherContext);
 
   const { data, error, loading } = useQuery(TeacherClassCourse, {
@@ -39,7 +41,7 @@ function Class_course() {
   if (loading) {
     classes = <p>loading...</p>;
   }
-  console.log(data);
+
   if (data)
     classes = data.teacher.classes.map((val, index) => {
       return (
@@ -124,6 +126,9 @@ function Class_course() {
       </div>
     );
   });
+
+  setShelf2(false);
+  setShelf3(false);
 
   return (
     <div className="nav_displays z-50 fixed overflow-y-auto md:top-[9%] bg-sidenav_bkg_color md:right-[6rem] md:pt-0 md:mt-4 md:h-max md:w-max md:rounded-md md:shadow-md top-0 h-[90%] w-[100vw] ">

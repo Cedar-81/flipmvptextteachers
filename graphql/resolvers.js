@@ -117,7 +117,7 @@ export const resolvers = {
       if (verified) {
         const value = await context.prisma.teacher_Note.findMany({
           where: {
-            teacherId: payload.teacherId,
+            authorId: payload.teacherId,
           },
         });
         return value.filter(
@@ -433,6 +433,9 @@ export const resolvers = {
 
     signIn: async (parent, { input }, context) => {
       const cookies = new Cookies(context.req, context.res, { secure: true });
+      let cookieDate = new Date();
+      cookieDate.setTime(cookieDate.getTime() + 7 * 24 * 60 * 60 * 1000);
+      cookieDate.toUTCString();
       const env = process.env.NODE_ENV;
       try {
         const val = await context.prisma.teacher.findUnique({
@@ -466,7 +469,7 @@ export const resolvers = {
             {
               httpOnly: true,
               path: "/",
-              maxAge: 3600 * 24 * 7,
+              expires: cookieDate,
               sameSite: "strict",
               secure: process.env.NODE_ENV === "production" ? true : false,
             }

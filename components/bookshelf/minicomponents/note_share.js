@@ -18,6 +18,7 @@ const Notes = gql`
     ) {
       id
       topic
+      available
     }
   }
 `;
@@ -38,6 +39,8 @@ function Note_share() {
     notedata,
     setNotedata,
     setCcdaction,
+    setShelf2,
+    setShelf3,
   } = useContext(TeacherContext);
 
   const [btn_txt, setBtn_txt] = useState("Share");
@@ -59,9 +62,6 @@ function Note_share() {
     ],
   });
 
-  if (loading) console.log("Creating...");
-  if (error) console.log("error", JSON.stringify(error, null, 2));
-
   const inputVal = {
     id: router.query.id,
     available: true,
@@ -72,6 +72,9 @@ function Note_share() {
     await shareNote({ variables: { input: inputVal } });
     setBtn_txt("Shared");
   };
+
+  setShelf2(false);
+  setShelf3(false);
 
   return (
     <div className="w-full h-[100vh] fixed top-0 z-50 bg-dark_color">

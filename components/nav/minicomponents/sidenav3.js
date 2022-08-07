@@ -123,6 +123,7 @@ function Sidenav3() {
       setClass_course(true);
     }
   };
+  console.log(selected_notes);
 
   return (
     <div className="w-[12rem]  overflow-y-auto z-[61] h-[100%] bg-sidenav_bkg_color shadow-lg">

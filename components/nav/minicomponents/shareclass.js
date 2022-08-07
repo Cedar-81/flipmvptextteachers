@@ -15,6 +15,8 @@ function Shareclass() {
     setClasscoursedata,
     setAction,
     setCcdaction,
+    setShelf2,
+    setShelf3,
   } = useContext(TeacherContext);
 
   const copy_class = async () => {
@@ -32,6 +34,8 @@ function Shareclass() {
       setBtn_txt("Copy");
     }, 3000);
   };
+  setShelf2(false);
+  setShelf3(false);
 
   return (
     <div className="w-full h-[100vh] fixed top-0 z-50 bg-dark_color">

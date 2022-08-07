@@ -7,6 +7,7 @@ const TeacherClassCourse = gql`
   query Teacher($teacherId: ID!) {
     teacher(teacherId: $teacherId) {
       firstName
+      lastName
       image
     }
   }
@@ -24,6 +25,7 @@ function Topnav() {
     teacherid,
     teacherprofile,
     setTopbaraction,
+    setTeachername,
   } = useContext(TeacherContext);
 
   const router = useRouter();
@@ -38,6 +40,7 @@ function Topnav() {
   }
   if (data) {
     val = data.teacher.firstName;
+    setTeachername(data.teacher.firstName + " " + data.teacher.lastName);
   }
 
   useEffect(() => {
