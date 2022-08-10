@@ -3,17 +3,14 @@ const OAuth2 = google.auth.OAuth2;
 const nodemailer = require("nodemailer");
 
 const oauth2Client = new OAuth2(
-  "775640691968-8922c8vtmcm3nd1il005r03ogu6dkcmp.apps.googleusercontent.co", // ClientID
-  "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", // Client Secret
+  `${process.env.NEXT_PUBLIC_CLIENT_ID}`, // ClientID
+  `${process.env.NEXT_PUBLIC_CLIENT_SECRET}`, // Client Secret
   "https://developers.google.com/oauthplayground" // Redirect URL
 );
 
 oauth2Client.setCredentials({
-  refresh_token:
-    "1//04iwoLUXVibq2CgYIARAAGAQSNwF-L9Irilz-xh6bTT1sOrlGH7Gh9Ugw5bgshq3d6eY3YXuKlGZ5C9fmHAkQbQIeUycc4ERRvMQ",
+  refresh_token: `${process.env.NEXT_PUBLIC_REFRESH_TOKEN}`.trim(),
 });
-
-const accessToken = oauth2Client.getAccessToken();
 
 export default async function sendEmail(val) {
   //   await sendEmail1(val);
@@ -22,6 +19,7 @@ export default async function sendEmail(val) {
 
 const sendEmail1 = async (val) => {
   try {
+    const accessToken = await oauth2Client.getAccessToken();
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {

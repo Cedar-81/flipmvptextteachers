@@ -16,7 +16,7 @@
     "bcryptjs": "^2.4.3",
     "cookies": "^0.8.0",
     "emailjs": "^4.0.0",
-    "googleapis": "^105.0.0",
+    "googleapis": "^39.2.0",
     "graphql": "^16.5.0",
     "jsonwebtoken": "^8.5.1",
     "micro-cors": "^0.1.1",
