@@ -3,13 +3,14 @@ const OAuth2 = google.auth.OAuth2;
 const nodemailer = require("nodemailer");
 
 const oauth2Client = new OAuth2(
-  `${process.env.NEXT_PUBLIC_CLIENT_ID}`, // ClientID
-  `${process.env.NEXT_PUBLIC_CLIENT_SECRET}`, // Client Secret
+  "775640691968-8922c8vtmcm3nd1il005r03ogu6dkcmp.apps.googleusercontent.co", // ClientID
+  "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", // Client Secret
   "https://developers.google.com/oauthplayground" // Redirect URL
 );
 
 oauth2Client.setCredentials({
-  refresh_token: `${process.env.NEXT_PUBLIC_REFRESH_TOKEN}`.trim(),
+  refresh_token:
+    "1//04iwoLUXVibq2CgYIARAAGAQSNwF-L9Irilz-xh6bTT1sOrlGH7Gh9Ugw5bgshq3d6eY3YXuKlGZ5C9fmHAkQbQIeUycc4ERRvMQ",
 });
 
 const accessToken = oauth2Client.getAccessToken();
