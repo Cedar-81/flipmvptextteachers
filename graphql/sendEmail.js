@@ -25,10 +25,10 @@ const sendEmail1 = async (val) => {
       service: "gmail",
       auth: {
         type: "OAuth2",
-        user: `${process.env.NEXT_PUBLIC_APP_EMAIL}`,
-        clientId: `${process.env.NEXT_PUBLIC_CLIENT_ID}`,
-        clientSecret: `${process.env.NEXT_PUBLIC_CLIENT_SECRET}`,
-        refreshToken: `${process.env.NEXT_PUBLIC_REFRESH_TOKEN}`,
+        user: `${process.env.NEXT_PUBLIC_APP_EMAIL}`.trim(),
+        clientId: `${process.env.NEXT_PUBLIC_CLIENT_ID}`.trim(),
+        clientSecret: `${process.env.NEXT_PUBLIC_CLIENT_SECRET}`.trim(),
+        refreshToken: `${process.env.NEXT_PUBLIC_REFRESH_TOKEN}`.trim(),
         accessToken: accessToken,
       },
       tls: {
