@@ -118,7 +118,7 @@ function Signup() {
 
     setErrorMsg("New Profile Created Successfully");
     setBtntxt("Created");
-    router.push("/auth/verification");
+    router.push(`/auth/verification/${create.data.createTeacher}`);
 
     setTimeout(() => {
       setErrorMsg("");

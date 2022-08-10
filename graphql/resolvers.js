@@ -340,7 +340,7 @@ export const resolvers = {
         } catch (error) {
           console.log(error);
         }
-        return "Successful";
+        return val.email;
       } catch (e) {
         console.log(e);
         return "Duplicate Email";

@@ -23,8 +23,6 @@ const sendEmail1 = async (val) => {
   try {
     const transporter = nodemailer.createTransport({
       service: "gmail",
-      port: 465,
-      secure: true,
       auth: {
         type: "OAuth2",
         user: `${process.env.NEXT_PUBLIC_APP_EMAIL}`,
@@ -32,6 +30,9 @@ const sendEmail1 = async (val) => {
         clientSecret: `${process.env.NEXT_PUBLIC_CLIENT_SECRET}`,
         refreshToken: `${process.env.NEXT_PUBLIC_REFRESH_TOKEN}`,
         accessToken: accessToken,
+      },
+      tls: {
+        rejectUnauthorized: false,
       },
     });
 
