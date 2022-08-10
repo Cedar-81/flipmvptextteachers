@@ -9,7 +9,7 @@ const oauth2Client = new OAuth2(
 );
 
 oauth2Client.setCredentials({
-  refresh_token: `${process.env.NEXT_PUBLIC_REFRESH_TOKEN}`,
+  refresh_token: `${process.env.NEXT_PUBLIC_REFRESH_TOKEN}`.trim(),
 });
 
 const accessToken = oauth2Client.getAccessToken();
