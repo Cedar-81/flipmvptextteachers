@@ -73,6 +73,10 @@ const sendEmail1 = async (val) => {
 
     console.log("access toke", accessToken);
 
+    if (!accessToken) {
+      return new Error("Unable to get access token");
+    }
+
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
