@@ -46,7 +46,7 @@ function Teachercontextprovider({ children }) {
   const [importnote, setImportnote] = useState(false);
   const [savenote, setSavenote] = useState(false);
   const [action, setAction] = useState("Class");
-  const [teachername, setTeachername] = useState("");
+  const [teachername, setTeachername] = useState("Miley Cyrus");
   const [teacherid, setTeacherid] = useState("cl60fwtlx0056dckskcuwnjey");
   const [teacherprofile, setTeacherprofile] = useState({
     firstname: "",
