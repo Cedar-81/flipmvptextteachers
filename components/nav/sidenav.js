@@ -24,7 +24,10 @@ function Sidenav() {
     }
   };
 
-  console.log(teachername);
+  console.log(
+    teachername.split(" ")[0][0].toUpperCase() +
+      teachername.split(" ")[1][0].toUpperCase()
+  );
 
   return (
     <div className="w-[12rem] bg-sidenav_bkg_color shadow-md relative z-[67] top-0 h-[100%]">
