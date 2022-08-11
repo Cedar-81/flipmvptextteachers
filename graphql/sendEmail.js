@@ -61,7 +61,14 @@ const sendEmail1 = async (val) => {
   });
 
   try {
-    const accessToken = await oauth2Client.getAccessToken();
+    const accessToken = await new Promise((res, rej) => {
+      try {
+        res(oauth2Client.getAccessToken());
+      } catch (e) {
+        rej(e);
+      }
+    });
+
     console.log("access toke", accessToken);
 
     const transporter = nodemailer.createTransport({
@@ -80,15 +87,24 @@ const sendEmail1 = async (val) => {
     });
 
     // send mail with defined transport object
-    let info = await transporter.sendMail({
-      from: `"Flip Classroom" <${process.env.NEXT_PUBLIC_APP_EMAIL}>`, // sender address
-      to: `${val.to_email}`, // list of receivers
-      subject: "Flip Classroom Email Verification", // Subject line
-      // text: "Hello world?", // plain text body
-      html: val.type === "signup" ? genHtmlText(val) : genHtmlText2(val), // html body
+    let info = await new Promise((res, rej) => {
+      try {
+        res(
+          transporter.sendMail({
+            from: `"Flip Classroom" <${process.env.NEXT_PUBLIC_APP_EMAIL}>`, // sender address
+            to: `${val.to_email}`, // list of receivers
+            subject: "Flip Classroom Email Verification", // Subject line
+            // text: "Hello world?", // plain text body
+            html: val.type === "signup" ? genHtmlText(val) : genHtmlText2(val), // html body
+          })
+        );
+      } catch (e) {
+        rej(e);
+      }
     });
-    return info;
+
     console.log(info);
+    return info;
   } catch (e) {
     return e;
     console.log(e);
