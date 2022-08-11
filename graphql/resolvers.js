@@ -487,7 +487,11 @@ export const resolvers = {
               secure: process.env.NODE_ENV === "production" ? true : false,
             }
           );
-          console.log(isAuth(context.req));
+          try {
+            console.log(isAuth(context.req));
+          } catch (e) {
+            console.log(e);
+          }
           return "Verified";
         }
       } catch (e) {

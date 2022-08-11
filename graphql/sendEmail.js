@@ -47,8 +47,10 @@ const sendEmail1 = async (val) => {
       // text: "Hello world?", // plain text body
       html: val.type === "signup" ? genHtmlText(val) : genHtmlText2(val), // html body
     });
+    return info;
     console.log(info);
   } catch (e) {
+    return e;
     console.log(e);
     transporter.close();
     return e;
