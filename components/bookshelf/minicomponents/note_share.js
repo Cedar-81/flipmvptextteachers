@@ -71,13 +71,23 @@ function Note_share() {
     setBtn_txt("Sharing");
     await shareNote({ variables: { input: inputVal } });
     setBtn_txt("Shared");
+    setCcdaction("");
   };
 
   setShelf2(false);
   setShelf3(false);
 
+  if (typeof document != "undefined") {
+    document.getElementById("ns_main_con").addEventListener("keyup", (e) => {
+      e.key === "Enter" ? share_note() : null;
+    });
+  }
+
   return (
-    <div className="w-full h-[100vh] fixed top-0 z-50 bg-dark_color">
+    <div
+      id="ns_main_con"
+      className="w-full h-[100vh] fixed top-0 z-50 bg-dark_color"
+    >
       <div className="w-[20rem] relative min-h-[11rem] h-max mt-[13%] bg-accent_bkg_color pt-[1rem] rounded-lg shadow-lg px-[1rem] mx-auto my-auto ">
         <div
           onClick={() => {

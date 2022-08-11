@@ -17,6 +17,7 @@ export const typeDefs = gql`
   }
 
   type Mutation {
+    resendEmail(input: resendEmailInput): String
     addTeacherNote(input: addTeacherNoteInput): Teacher_Note!
     updateTeacherNote(input: updateTeacherNoteInput): Teacher_Note!
     updateTeacherProfile(input: updateTeacherProfileInput): Teacher!
@@ -29,6 +30,8 @@ export const typeDefs = gql`
     createTeacher(input: createTeacherInput): String
     verifyEmail(input: verifyEmailInput): String
     signIn(input: signInInput): String
+    createPasswordLink(input: createPasswordLinkInput): String
+    updatePassword(input: updatePasswordInput): String
   }
 
   type Class {
@@ -97,6 +100,19 @@ export const typeDefs = gql`
 
   input verifyEmailInput {
     code: String!
+  }
+
+  input resendEmailInput {
+    email: String!
+  }
+
+  input createPasswordLinkInput {
+    email: String
+  }
+
+  input updatePasswordInput {
+    link: String
+    newPassword: String
   }
 
   input updateTeacherProfileInput {

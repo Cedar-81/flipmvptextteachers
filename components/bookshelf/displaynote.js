@@ -27,6 +27,7 @@ function Displaynote() {
     creatednoteid,
     notedata,
     notetype,
+    importnote,
     setNotedata,
     setUpdatenotechecker,
     classcoursedata,
@@ -61,11 +62,28 @@ function Displaynote() {
     val = data.note;
   }
 
+  // useEffect(() => {
+  //   if (
+  //     typeof document != "undefined" &&
+  //     val?.editableContent == "importedNote"
+  //   ) {
+  //     // Selecting the iframe element
+  //     var iframe = document.getElementById("imported_note");
+  //     console.log("height", iframe.contentWindow.document.body.offsetHeight);
+
+  //     // Adjusting the iframe height onload event
+  //     iframe.onload = function () {
+  //       iframe.style.height =
+  //         iframe.contentWindow.document.body.scrollHeight + "px";
+  //     };
+  //   }
+  // }, []);
+
   if (!notedata.updateNote) setCreate(false);
 
   return (
     <>
-      {!notedata.updateNote && (
+      {!notedata.updateNote && val?.editableContent !== "importedNote" && (
         <>
           <div className="note_container m-2 w-[8.5in] mx-auto bg-accent_bkg_color shadow-xl rounded-xl p-4 min-h-full">
             <p className="date text-sm text-accent_color font-medium">
@@ -93,7 +111,20 @@ function Displaynote() {
           <div className="h-[6rem]"></div>
         </>
       )}
-      {notedata.updateNote && <Editor />}
+      {notedata.updateNote && val?.editableContent !== "importedNote" && (
+        <Editor />
+      )}
+
+      {val?.editableContent === "importedNote" && (
+        <>
+          <iframe
+            id="imported_note"
+            className="note_container m-2 w-[8.5in] min-h-max h-[85%] mx-auto bg-accent_bkg_color shadow-xl rounded-xl p-4 "
+            src={`${val?.content}?embedded=true`}
+          ></iframe>
+          <Bookshelfeditbutton />
+        </>
+      )}
     </>
   );
 }

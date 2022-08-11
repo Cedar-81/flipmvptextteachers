@@ -94,12 +94,14 @@ function Bookshelfeditbutton() {
 
       {bookshelfbuttons.toggle_components && (
         <div className={`editcomponents ${styles.editcomponents} `}>
-          <div
-            className="bg-main_color h-[3rem] flex items-center justify-center rounded-full shadow-md cursor-pointer w-[3rem] mb-4"
-            onClick={edit_note}
-          >
-            <span className="material-icons text-accent_color">edit</span>
-          </div>
+          {data?.note.editableContent !== "importedNote" && (
+            <div
+              className="bg-main_color h-[3rem] flex items-center justify-center rounded-full shadow-md cursor-pointer w-[3rem] mb-4"
+              onClick={edit_note}
+            >
+              <span className="material-icons text-accent_color">edit</span>
+            </div>
+          )}
           {notetype === "school" && (
             <div
               onClick={share_note}

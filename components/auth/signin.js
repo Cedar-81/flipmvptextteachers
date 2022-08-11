@@ -132,6 +132,7 @@ function Signin() {
         )}
         <div className="mt-10">
           <input
+            onKeyUp={(e) => (e.key === "Enter" ? checker() : null)}
             className={`input ${styles.input}`}
             type={"email"}
             onChange={(e) => setEmail(e.target.value)}
@@ -139,6 +140,7 @@ function Signin() {
             placeholder="Email"
           />
           <input
+            onKeyUp={(e) => (e.key === "Enter" ? checker() : null)}
             className={`input mt-8 ${styles.input}`}
             type={"password"}
             onChange={(e) => setPassword(e.target.value)}
@@ -147,13 +149,19 @@ function Signin() {
           />
         </div>
 
-        <div className="w-full flex justify-start">
+        <div className="w-full flex flex-col justify-start">
           <button
             onClick={() => checker()}
             className="bg-accent_color h-[2.5rem] w-[7rem] cursor-pointer hover:shadow-md text-main_color px-4 relative mt-5 mb-5 py-1 rounded-md text-base"
           >
             {btntxt}
           </button>
+          <p onClick={() => router.push("/auth/reset")} className="text-sm">
+            Forgot password?{" "}
+            <span className="font-semibold text-accent_color cursor-pointer">
+              Reset
+            </span>
+          </p>
         </div>
       </div>
     </div>

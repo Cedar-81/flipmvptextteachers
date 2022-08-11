@@ -12,6 +12,7 @@ function Teachercontextprovider({ children }) {
   const [sidebartype, setSidebartype] = useState("");
   const [shelf2, setShelf2] = useState(false);
   const [shelf3, setShelf3] = useState(false);
+  const [noteLink, setNotelink] = useState("");
   const [updatenotechecker, setUpdatenotechecker] = useState(false);
   const [bookshelfbuttons, setBookshelfbuttons] = useState({
     toggle_components: true,
@@ -42,6 +43,7 @@ function Teachercontextprovider({ children }) {
   const [notetitle, setNotetitle] = useState("Untitled");
   const [editablecontent, setEditablecontent] = useState("");
   const [creatednoteid, setCreatednoteid] = useState("");
+  const [importnote, setImportnote] = useState(false);
   const [savenote, setSavenote] = useState(false);
   const [action, setAction] = useState("Class");
   const [teachername, setTeachername] = useState("");
@@ -137,6 +139,8 @@ function Teachercontextprovider({ children }) {
     setNotecontent,
     editablecontent,
     setEditablecontent,
+    setNotelink,
+    noteLink,
     savenote,
     setSavenote,
     notetitle,
@@ -168,6 +172,8 @@ function Teachercontextprovider({ children }) {
     setCcdaction,
     teachername,
     setTeachername,
+    importnote,
+    setImportnote,
   };
 
   return (

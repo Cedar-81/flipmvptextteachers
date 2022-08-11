@@ -334,6 +334,7 @@ export const resolvers = {
         const emailval = {
           to_email: input.email,
           message: generateCode,
+          type: "signup",
         };
         try {
           sendEmail(emailval);
@@ -344,6 +345,58 @@ export const resolvers = {
       } catch (e) {
         console.log(e);
         return "Duplicate Email";
+      }
+    },
+
+    createPasswordLink: async (parent, { input }, context) => {
+      try {
+        const val = await context.prisma.teacher.findUnique({
+          where: {
+            email: input.email,
+          },
+        });
+        const inputVal = {
+          to_email: val.email,
+          message: `https://localhost:3000/auth/changepassword/${val.id}`,
+          type: "new_password",
+        };
+        sendEmail(inputVal);
+        return "Successful";
+      } catch (e) {
+        console.log(e);
+        return "Failed";
+      }
+    },
+
+    updatePassword: async (parent, { input }, context) => {
+      try {
+        const cookies = new Cookies(context.req, context.res, { secure: true });
+        const password = input.newPassword;
+        const hashedPassword = await bcrypt.hash(password, 12);
+        await context.prisma.teacher.update({
+          where: {
+            id: input.link,
+          },
+          data: {
+            password: hashedPassword,
+          },
+        });
+        const access = (key, exp) => {
+          return sign({ teacherId: "null" }, key, {
+            expiresIn: exp,
+          });
+        };
+        cookies.set("flip_classroom_auth_teachers", access(`null`, "0"), {
+          httpOnly: true,
+          path: "/",
+          expires: 0,
+          sameSite: "strict",
+          secure: process.env.NODE_ENV === "production" ? true : false,
+        });
+        return "Verified";
+      } catch (e) {
+        console.log(e);
+        return "Failed";
       }
     },
 
@@ -363,6 +416,30 @@ export const resolvers = {
           return "Failed";
         }
       } catch (e) {
+        return "Failed";
+      }
+    },
+
+    resendEmail: async (parent, { input }, context) => {
+      try {
+        const val = await context.prisma.teacher.findUnique({
+          where: {
+            email: input.email,
+          },
+        });
+        const emailval = {
+          to_email: input.email,
+          message: val.emailCode,
+          type: "signup",
+        };
+        try {
+          sendEmail(emailval);
+        } catch (e) {
+          console.log(e);
+        }
+        return "Successful";
+      } catch (e) {
+        console.log(e);
         return "Failed";
       }
     },

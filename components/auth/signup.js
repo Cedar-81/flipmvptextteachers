@@ -190,6 +190,7 @@ function Signup() {
           <input
             onChange={get_teacher_info}
             className={`input ${styles.input}`}
+            onKeyUp={(e) => (e.key === "Enter" ? checker() : null)}
             type="email"
             name="email"
             value={teacherinfo?.email}
@@ -198,6 +199,7 @@ function Signup() {
           <input
             onChange={get_teacher_info}
             className={`input ${styles.input}`}
+            onKeyUp={(e) => (e.key === "Enter" ? checker() : null)}
             type="tel"
             name="tel"
             value={teacherinfo?.tel}
@@ -209,6 +211,7 @@ function Signup() {
             <input
               onChange={get_teacher_info}
               className={`input ${styles.input}`}
+              onKeyUp={(e) => (e.key === "Enter" ? checker() : null)}
               type="text"
               name="address"
               value={teacherinfo?.address}
@@ -217,6 +220,7 @@ function Signup() {
             <input
               onChange={get_teacher_info}
               className={`input ${styles.input}`}
+              onKeyUp={(e) => (e.key === "Enter" ? checker() : null)}
               type="number"
               name="postal_code"
               value={teacherinfo?.postal_code}
@@ -227,6 +231,7 @@ function Signup() {
             <input
               onChange={get_teacher_info}
               className={`input ${styles.input}`}
+              onKeyUp={(e) => (e.key === "Enter" ? checker() : null)}
               type="text"
               name="country"
               value={teacherinfo?.country}
@@ -235,6 +240,7 @@ function Signup() {
             <input
               onChange={get_teacher_info}
               className={`input ${styles.input}`}
+              onKeyUp={(e) => (e.key === "Enter" ? checker() : null)}
               type="text"
               name="state"
               value={teacherinfo?.state}
@@ -246,6 +252,7 @@ function Signup() {
           <input
             onChange={get_teacher_info}
             className={`input ${styles.input}`}
+            onKeyUp={(e) => (e.key === "Enter" ? checker() : null)}
             type="password"
             name="new_password"
             value={teacherinfo?.new_password}
@@ -254,6 +261,7 @@ function Signup() {
           <input
             onChange={get_teacher_info}
             className={`input ${styles.input}`}
+            onKeyUp={(e) => (e.key === "Enter" ? checker() : null)}
             type="password"
             name="confirm_password"
             value={teacherinfo?.confirm_password}

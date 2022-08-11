@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { gql, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 
@@ -8,10 +8,19 @@ const Verify = gql`
   }
 `;
 
+const resendEmail = gql`
+  mutation ResendEmail($input: resendEmailInput) {
+    resendEmail(input: $input)
+  }
+`;
+
 function Verification() {
   const router = useRouter();
   const [verify, { data, loading, error }] = useMutation(Verify);
+  const [resend_email, { data: r_data, loading: r_loading, error: r_error }] =
+    useMutation(resendEmail);
   const [code, setCode] = useState("");
+  const [showResend, setShowResend] = useState(false);
   const [btntxt, setBtntxt] = useState("Verify");
   const [err_msg, setErrorMsg] = useState("");
 
@@ -26,9 +35,6 @@ function Verification() {
     }
   };
 
-  if (loading) console.log("Creating...");
-  if (error) console.log(JSON.stringify(error, null, 2));
-
   const authorize = async () => {
     const inputVal = {
       code,
@@ -39,10 +45,7 @@ function Verification() {
       variables: { input: inputVal },
     });
     if (create.data.verifyEmail === "Failed") {
-      return (
-        setErrorMsg("Invalid email or code, please try again"),
-        setBtntxt("Verify")
-      );
+      return setErrorMsg("Invalid code, please try again"), setBtntxt("Verify");
     }
 
     setErrorMsg("Verified");
@@ -57,6 +60,38 @@ function Verification() {
       setBtntxt("Verify");
     }, 5000);
   };
+
+  const resend = async () => {
+    const inputVal = {
+      email: router.query.email,
+    };
+    setErrorMsg("...Resending. Please wait.");
+    const create = await resend_email({
+      variables: { input: inputVal },
+    });
+    if (create.data.resendEmail === "Failed") {
+      setErrorMsg("Server error. Try again"), setShowResend(true);
+      setTimeout(() => {
+        setErrorMsg("");
+      }, 3000);
+      return;
+    }
+
+    setErrorMsg("Sent");
+    setShowResend(false);
+    setTimeout(() => {
+      setErrorMsg("");
+    }, 3000);
+    setTimeout(() => {
+      setShowResend(true);
+    }, 20000);
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShowResend(true);
+    }, 20000);
+  }, []);
 
   return (
     <div className="w-full h-[100vh] fixed top-0 z-50 bg-main_color">
@@ -83,6 +118,14 @@ function Verification() {
           placeholder="Enter code"
         />
         <div className="w-full flex justify-end">
+          {showResend && (
+            <button
+              onClick={resend}
+              className="bg-accent_color cursor-pointer mr-4 hover:shadow-md text-main_color px-4 relative mt-5 mb-5 py-1 rounded-md text-base"
+            >
+              Resend
+            </button>
+          )}
           <button
             onClick={() => checker()}
             className="bg-accent_color cursor-pointer hover:shadow-md text-main_color px-4 relative mt-5 mb-5 py-1 rounded-md text-base"
