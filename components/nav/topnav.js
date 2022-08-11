@@ -38,7 +38,11 @@ function Topnav() {
   if (loading) {
     val = "...";
   }
-  if (data) {
+  if (
+    data &&
+    data.teacher.firstName !== undefined &&
+    data.teacher.lastName !== undefined
+  ) {
     val = data.teacher.firstName;
     setTeachername(data.teacher.firstName + " " + data.teacher.lastName);
   }
