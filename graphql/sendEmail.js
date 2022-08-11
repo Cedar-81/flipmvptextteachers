@@ -62,19 +62,6 @@ const sendEmail1 = async (val) => {
   console.log("Set credentials");
 
   try {
-    // console.log("time to get access tokens");
-    // const accessToken = await new Promise((res, rej) => {
-    //   try {
-    //     res(oauth2Client.getAccessToken());
-    //   } catch (e) {
-    //     rej(e);
-    //   }
-    // });
-
-    // if (!accessToken) {
-    //   return new Error("Unable to get access token");
-    // }
-
     const accessToken = await oauth2Client.getAccessToken();
     console.log("access toke", accessToken);
 
@@ -113,9 +100,9 @@ const sendEmail1 = async (val) => {
     console.log(info);
     return info;
   } catch (e) {
-    return e;
     console.log(e);
     transporter.close();
+    return e;
     return e;
   }
 };
