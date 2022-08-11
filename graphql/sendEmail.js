@@ -59,8 +59,10 @@ const sendEmail1 = async (val) => {
   oauth2Client.setCredentials({
     refresh_token: `${process.env.NEXT_PUBLIC_REFRESH_TOKEN}`.trim(),
   });
+  console.log("Set credentials");
 
   try {
+    console.log("time to get access tokens");
     const accessToken = await new Promise((res, rej) => {
       try {
         res(oauth2Client.getAccessToken());
