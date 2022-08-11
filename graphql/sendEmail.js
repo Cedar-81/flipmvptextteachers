@@ -62,20 +62,21 @@ const sendEmail1 = async (val) => {
   console.log("Set credentials");
 
   try {
-    console.log("time to get access tokens");
-    const accessToken = await new Promise((res, rej) => {
-      try {
-        res(oauth2Client.getAccessToken());
-      } catch (e) {
-        rej(e);
-      }
-    });
+    // console.log("time to get access tokens");
+    // const accessToken = await new Promise((res, rej) => {
+    //   try {
+    //     res(oauth2Client.getAccessToken());
+    //   } catch (e) {
+    //     rej(e);
+    //   }
+    // });
 
+    // if (!accessToken) {
+    //   return new Error("Unable to get access token");
+    // }
+
+    const accessToken = oauth2Client.getAccessToken();
     console.log("access toke", accessToken);
-
-    if (!accessToken) {
-      return new Error("Unable to get access token");
-    }
 
     const transporter = nodemailer.createTransport({
       service: "gmail",
