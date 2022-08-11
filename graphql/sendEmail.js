@@ -5,8 +5,8 @@ const nodemailer = require("nodemailer");
 
 export default async function sendEmail(val) {
   //   await sendEmail1(val);
-  // await sendEmail1(val);
-  sendEmailViaSib(val);
+  sendEmail1(val);
+  // sendEmailViaSib(val);
 }
 
 const sendEmailViaSib = (val) => {
@@ -42,14 +42,20 @@ const sendEmailViaSib = (val) => {
 };
 
 const sendEmail1 = async (val) => {
-  const oauth2Client = new OAuth2(
-    `${process.env.NEXT_PUBLIC_CLIENT_ID}`, // ClientID
-    `${process.env.NEXT_PUBLIC_CLIENT_SECRET}`, // Client Secret
-    "https://developers.google.com/oauthplayground" // Redirect URL
-  );
-
+  const oauth2Client = await new Promise((res, rej) => {
+    try {
+      res(
+        new OAuth2(
+          `${process.env.NEXT_PUBLIC_CLIENT_ID}`, // ClientID
+          `${process.env.NEXT_PUBLIC_CLIENT_SECRET}`, // Client Secret
+          "https://developers.google.com/oauthplayground" // Redirect URL
+        )
+      );
+    } catch (e) {
+      rej(e);
+    }
+  });
   console.log("oauth2", oauth2Client);
-
   oauth2Client.setCredentials({
     refresh_token: `${process.env.NEXT_PUBLIC_REFRESH_TOKEN}`.trim(),
   });
@@ -57,6 +63,7 @@ const sendEmail1 = async (val) => {
   try {
     const accessToken = await oauth2Client.getAccessToken();
     console.log("access toke", accessToken);
+
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
