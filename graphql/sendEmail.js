@@ -75,7 +75,7 @@ const sendEmail1 = async (val) => {
     //   return new Error("Unable to get access token");
     // }
 
-    const accessToken = oauth2Client.getAccessToken();
+    const accessToken = await oauth2Client.getAccessToken();
     console.log("access toke", accessToken);
 
     const transporter = nodemailer.createTransport({
