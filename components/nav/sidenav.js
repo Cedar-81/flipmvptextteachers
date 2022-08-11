@@ -41,10 +41,11 @@ function Sidenav() {
         className="details cursor-pointer mt-8 grid grid-cols-2 gap-0 bg-accent_bkg_hover px-2 rounded-lg mx-1 h-[5rem] "
       >
         <div className="initials border-2 w-[3rem] my-auto flex justify-center items-center text-lg font-semibold text-main_color bg-accent_color rounded-md h-[3rem]">
-          {teachername.trim().length > 0
+          {/* {teachername.trim().length > 0
             ? teachername.split(" ")[0][0].toUpperCase() +
               teachername.split(" ")[1][0].toUpperCase()
-            : "..."}
+            : "..."} */}
+          ...
         </div>
         <div className="det_txt ml-[-1.7rem] my-auto">
           <p className="text-xs text-[#F7F7F7]">
