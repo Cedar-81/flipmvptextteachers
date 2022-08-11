@@ -1,26 +1,59 @@
+const Sib = require("sib-api-v3-sdk");
 const { google } = require("googleapis");
 const OAuth2 = google.auth.OAuth2;
 const nodemailer = require("nodemailer");
 
-const oauth2Client = new OAuth2(
-  `${process.env.NEXT_PUBLIC_CLIENT_ID}`, // ClientID
-  `${process.env.NEXT_PUBLIC_CLIENT_SECRET}`, // Client Secret
-  "https://developers.google.com/oauthplayground" // Redirect URL
-);
-
-console.log("oauth2", oauth2Client);
-
-oauth2Client.setCredentials({
-  refresh_token: `${process.env.NEXT_PUBLIC_REFRESH_TOKEN}`.trim(),
-});
-
 export default async function sendEmail(val) {
   //   await sendEmail1(val);
-
-  await sendEmail1(val);
+  // await sendEmail1(val);
+  sendEmailViaSib(val);
 }
 
+const sendEmailViaSib = (val) => {
+  const client = Sib.ApiClient.instance;
+  const apiKey = client.authentications["api-key"];
+  apiKey.apiKey = process.env.NEXT_PUBLIC_SIB_API_KEY;
+
+  const tranEmailApi = new Sib.TransactionalEmailsApi();
+
+  const sender = {
+    email: `${process.env.NEXT_PUBLIC_APP_EMAIL}`,
+    name: "Flip Classroom",
+  };
+
+  const receivers = [
+    {
+      email: val.to_email,
+    },
+  ];
+
+  tranEmailApi
+    .sendTransacEmail({
+      sender,
+      to: receivers,
+      subject:
+        val.type === "signup"
+          ? "Flip Classroom Verification Code"
+          : "Flip Classroom Password Reset Link",
+      htmlContent: val.type === "signup" ? genHtmlText(val) : genHtmlText2(val),
+    })
+    .then(console.log)
+    .catch(console.log);
+};
+
 const sendEmail1 = async (val) => {
+  const oauth2Client = new OAuth2(
+    `${process.env.NEXT_PUBLIC_CLIENT_ID}`, // ClientID
+    `${process.env.NEXT_PUBLIC_CLIENT_SECRET}`, // Client Secret
+    "https://developers.google.com/oauthplayground" // Redirect URL
+  );
+
+  console.log("oauth2", oauth2Client);
+
+  oauth2Client.setCredentials({
+    refresh_token: `${process.env.NEXT_PUBLIC_REFRESH_TOKEN}`.trim(),
+  });
+
   try {
     const accessToken = await oauth2Client.getAccessToken();
     console.log("access toke", accessToken);

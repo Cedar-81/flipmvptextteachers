@@ -340,6 +340,7 @@ export const resolvers = {
           sendEmail(emailval);
         } catch (error) {
           console.log(error);
+          return "Server Error";
         }
         return val.email;
       } catch (e) {

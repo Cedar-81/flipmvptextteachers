@@ -115,6 +115,9 @@ function Signup() {
         setBtntxt("Sign Up")
       );
     }
+    if (create.data.createTeacher === "Server Error") {
+      return setErrorMsg("Server Error"), setBtntxt("Sign Up");
+    }
 
     setErrorMsg("New Profile Created Successfully");
     setBtntxt("Created");
